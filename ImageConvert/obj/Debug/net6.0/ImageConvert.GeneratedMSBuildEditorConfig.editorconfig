@@ -8,53 +8,53 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ImageConvert
 build_property.RootNamespace = ImageConvert
-build_property.ProjectDir = c:\Users\elino\OneDrive\Área de Trabalho\Material de estudo\TCC PDI\PDI Project\OpenImageProcessor\ImageConvert\
+build_property.ProjectDir = C:\Users\elino\OneDrive\Área de Trabalho\Material de estudo\TCC PDI\PDI Project\OpenImageProcessor\ImageConvert\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = c:\Users\elino\OneDrive\Área de Trabalho\Material de estudo\TCC PDI\PDI Project\OpenImageProcessor\ImageConvert
+build_property.MSBuildProjectDirectory = C:\Users\elino\OneDrive\Área de Trabalho\Material de estudo\TCC PDI\PDI Project\OpenImageProcessor\ImageConvert
 build_property._RazorSourceGeneratorDebug = 
 
-[c:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/App.razor]
+[C:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Pages/FetchData.razor]
+[C:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Pages/FetchData.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Pages/Index.razor]
+[C:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Shared/SurveyPrompt.razor]
+[C:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/_Imports.razor]
+[C:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Shared/MainLayout.razor]
+[C:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-38mf4d1mry
+
+[C:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-hkzolk7b9s
 
-[c:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Shared/NavMenu.razor]
+[C:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-j5c9yhzysg
 
-[c:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Pages/Error.cshtml]
+[C:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Pages/_Host.cshtml]
+[C:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Pages/_Layout.cshtml]
+[C:/Users/elino/OneDrive/Área de Trabalho/Material de estudo/TCC PDI/PDI Project/OpenImageProcessor/ImageConvert/Pages/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

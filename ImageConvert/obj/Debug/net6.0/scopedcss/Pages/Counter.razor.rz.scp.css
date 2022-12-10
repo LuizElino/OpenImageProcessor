@@ -1,0 +1,125 @@
+.space[b-38mf4d1mry] {
+    margin: 3%;
+}
+
+.page[b-38mf4d1mry] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar[b-38mf4d1mry] {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+@media (min-width: 641px) {
+    .page[b-38mf4d1mry] {
+        flex-direction: row;
+    }
+
+    .sidebar[b-38mf4d1mry] {
+        width: 500px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+}
+
+/* container image */
+
+.container[b-38mf4d1mry] {  
+    width: 100%;  
+    height: 960px;  
+    border: 5px solid red;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    }  
+
+/* navbar */
+
+.navbar-toggler[b-38mf4d1mry] {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top-row[b-38mf4d1mry] {
+    height: 3.5rem;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.navbar-brand[b-38mf4d1mry] {
+    font-size: 1.1rem;
+}
+
+.oi[b-38mf4d1mry] {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: text-top;
+    top: -2px;
+}
+
+.nav-item[b-38mf4d1mry] {
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+    .nav-item:first-of-type[b-38mf4d1mry] {
+        padding-top: 1rem;
+    }
+
+    .nav-item:last-of-type[b-38mf4d1mry] {
+        padding-bottom: 1rem;
+    }
+
+    .nav-item[b-38mf4d1mry]  a {
+        color: #d7d7d7;
+        border-radius: 4px;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        line-height: 3rem;
+    }
+
+.nav-item[b-38mf4d1mry]  a.active {
+    background-color: rgba(255,255,255,0.25);
+    color: white;
+}
+
+.nav-item[b-38mf4d1mry]  a:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+@media (min-width: 641px) {
+    .navbar-toggler[b-38mf4d1mry] {
+        display: none;
+    }
+
+    .collapse[b-38mf4d1mry] {
+        /* Never collapse the sidebar for wide screens */
+        display: block;
+    }
+}
+
+dl[b-38mf4d1mry], ol[b-38mf4d1mry], ul[b-38mf4d1mry] {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.center[b-38mf4d1mry]{
+    justify-content: space-between;
+}
+
+.navbutton[b-38mf4d1mry]{
+    margin-right: 5%;
+    width: 125px;
+    height: 50px;
+}
+
+button[b-38mf4d1mry]{
+    border-radius: 15px;
+}
+
+.navLabel[b-38mf4d1mry] {
+    color:white;
+}

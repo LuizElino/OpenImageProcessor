@@ -1,4 +1,4 @@
-﻿@page "/counter"
+﻿@page "/"
 @using System
 @using System.IO
 @using Microsoft.AspNetCore.Hosting
@@ -7,18 +7,40 @@
 @inject IWebHostEnvironment Environment
 @inject PythonService pythonService
 
-<style>
-    .space {
-        margin: 3%;
-    }
-</style>
+<div class="page">
+    <div class="sidebar">
 
-<p>
-    <label>
-        Upload up to @maxAllowedFiles of up to @maxFileSize bytes:
-        <InputFile OnChange="@LoadFiles" multiple />
-    </label>
-</p>
+    <div class="top-row ps-3 navbar navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="">ImageConvert</a>
+            <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+        <nav class="flex-column">
+            <div class="nav-item px-3">
+            <label class="navLabel">Especial Features</label>
+            </div>
+            <div class="nav-item px-3">
+               <button class="navbutton">Make Gray</button><button class="navbutton">Count</button><button class="navbutton">Equalize</button>
+            </div>
+        </nav>
+    </div>
+
+</div>
+
+<div class="container">
+    <p>
+        <label>
+            Upload up to @maxAllowedFiles of up to @maxFileSize bytes:
+            <InputFile OnChange="@LoadFiles" multiple />
+        </label>
+    </p>
+</div>
+</div>
 
 @if (isLoading)
 {
@@ -443,8 +465,13 @@ else
     public int SobelValue = 1;
     public int Threshould1Value = 101;
     public int Threshould2Value = 101;
+    private bool collapseNavMenu = true;
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
-
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
     private void Resetvariables()
     {
         hasEqualized = false;

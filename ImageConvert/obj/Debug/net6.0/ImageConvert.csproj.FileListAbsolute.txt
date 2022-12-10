@@ -54,3 +54,4 @@ C:\Users\elino\OneDrive\Área de Trabalho\Material de estudo\TCC PDI\PDI Project
 C:\Users\elino\OneDrive\Área de Trabalho\Material de estudo\TCC PDI\PDI Project\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ImageConvert.pdb
 C:\Users\elino\OneDrive\Área de Trabalho\Material de estudo\TCC PDI\PDI Project\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ImageConvert.genruntimeconfig.cache
 C:\Users\elino\OneDrive\Área de Trabalho\Material de estudo\TCC PDI\PDI Project\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ref\ImageConvert.dll
+C:\Users\elino\OneDrive\Área de Trabalho\Material de estudo\TCC PDI\PDI Project\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\scopedcss\Pages\Counter.razor.rz.scp.css

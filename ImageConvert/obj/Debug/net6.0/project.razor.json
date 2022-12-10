@@ -12,39 +12,6 @@
   "ProjectWorkspaceState": {
     "TagHelpers": [
       {
-        "HashCode": 1261200454,
-        "Kind": "Components.Component",
-        "Name": "ImageConvert.Pages.Counter",
-        "AssemblyName": "ImageConvert",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Counter"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "ImageConvert.Pages.Counter"
-        }
-      },
-      {
-        "HashCode": 1623788570,
-        "Kind": "Components.Component",
-        "Name": "ImageConvert.Pages.Counter",
-        "AssemblyName": "ImageConvert",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "ImageConvert.Pages.Counter"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "ImageConvert.Pages.Counter",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
         "HashCode": 2132402929,
         "Kind": "Components.Component",
         "Name": "ImageConvert.Pages.FetchData",
@@ -107,6 +74,39 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "ImageConvert.Pages.Index",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1261200454,
+        "Kind": "Components.Component",
+        "Name": "ImageConvert.Pages.Counter",
+        "AssemblyName": "ImageConvert",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Counter"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "ImageConvert.Pages.Counter"
+        }
+      },
+      {
+        "HashCode": 1623788570,
+        "Kind": "Components.Component",
+        "Name": "ImageConvert.Pages.Counter",
+        "AssemblyName": "ImageConvert",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ImageConvert.Pages.Counter"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "ImageConvert.Pages.Counter",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -193,6 +193,39 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "ImageConvert.Shared.SurveyPrompt",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 104077001,
+        "Kind": "Components.Component",
+        "Name": "ImageConvert.Shared.NavMenu",
+        "AssemblyName": "ImageConvert",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "NavMenu"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "ImageConvert.Shared.NavMenu"
+        }
+      },
+      {
+        "HashCode": 348664817,
+        "Kind": "Components.Component",
+        "Name": "ImageConvert.Shared.NavMenu",
+        "AssemblyName": "ImageConvert",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ImageConvert.Shared.NavMenu"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "ImageConvert.Shared.NavMenu",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -289,39 +322,6 @@
           "Runtime.Name": "Components.None",
           "Common.TypeName": "ImageConvert.Shared.MainLayout.Body",
           "Components.IsSpecialKind": "Components.ChildContent",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": 104077001,
-        "Kind": "Components.Component",
-        "Name": "ImageConvert.Shared.NavMenu",
-        "AssemblyName": "ImageConvert",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "NavMenu"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "ImageConvert.Shared.NavMenu"
-        }
-      },
-      {
-        "HashCode": 348664817,
-        "Kind": "Components.Component",
-        "Name": "ImageConvert.Shared.NavMenu",
-        "AssemblyName": "ImageConvert",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "ImageConvert.Shared.NavMenu"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "ImageConvert.Shared.NavMenu",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
