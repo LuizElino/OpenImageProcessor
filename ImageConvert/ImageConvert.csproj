@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\" />
+    <Folder Include="wwwroot\Imgs\Input\" />
+    <Folder Include="wwwroot\Imgs\Output\AdaptativeSegmentation\Histogram\" />
+    <Folder Include="wwwroot\Imgs\Output\CannyEdge\Histogram\" />
+    <Folder Include="wwwroot\Imgs\Output\Canny\Histogram\" />
+    <Folder Include="wwwroot\Imgs\Output\Equalized\Histogram\" />
+    <Folder Include="wwwroot\Imgs\Output\Gaussian\Histogram\" />
+    <Folder Include="wwwroot\Imgs\Output\Histogram\" />
+    <Folder Include="wwwroot\Imgs\Output\ManualSegmentation\Histogram\" />
+    <Folder Include="wwwroot\Imgs\Output\Mediam\Histogram\" />
+    <Folder Include="wwwroot\Imgs\Output\Mediana\Histogram\" />
+    <Folder Include="wwwroot\Imgs\Output\Otsu\Histogram\" />
+    <Folder Include="wwwroot\Imgs\Output\Sobel\Histogram\" />
+  </ItemGroup>
+
+</Project>
