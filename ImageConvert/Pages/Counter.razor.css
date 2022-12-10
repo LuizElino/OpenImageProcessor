@@ -111,9 +111,12 @@ dl, ol, ul {
 }
 
 .navbutton{
-    margin-right: 5%;
-    width: 125px;
+    margin-right: 1%;
+    width: 150px;
     height: 50px;
+}
+.navbutton:hover{
+    background-color:#B4B4B4; 
 }
 
 button{
@@ -122,4 +125,39 @@ button{
 
 .navLabel {
     color:white;
+}
+.center{
+    align-items: center;
+    text-align: center;
+}
+
+.rightbutton{
+    border-radius: 0px 15px 15px 0px;
+}
+
+.leftbutton{
+    border-radius: 15px 0px 0px 15px;
+}
+
+.centerbutton{
+    border-radius: 0px;
+}
+
+.rightbutton, .leftbutton,.centerbutton{
+    width: 150px;
+    margin-right: 1%;
+}
+
+.navlabel{
+    color:white;
+    margin-right: 3%;
+}
+
+.navrange{
+    width: 100%;
+}
+
+label{
+    color:white;
+    margin: 5%;
 }

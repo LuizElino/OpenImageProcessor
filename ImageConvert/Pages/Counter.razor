@@ -21,11 +21,49 @@
 
     <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
         <nav class="flex-column">
-            <div class="nav-item px-3">
-            <label class="navLabel">Especial Features</label>
+           @*  especial features *@
+            <div class="nav-item px-3 center">
+            <h2 class="navLabel">Especial Features</h2>
             </div>
             <div class="nav-item px-3">
                <button class="navbutton">Make Gray</button><button class="navbutton">Count</button><button class="navbutton">Equalize</button>
+            </div>
+            @*  filters *@
+             <div class="nav-item px-3 center">
+            <h2 class="navLabel">Filters</h2>
+            </div>
+            <div class="nav-item px-3">
+               <button class="navbutton leftbutton">Mediam</button><button class="navbutton centerbutton">Gaussian</button><button class="navbutton rightbutton">Mediana</button>
+            </div>
+            <div class="nav-item px-3">
+                <label class="navlabel">Range</label><input class="navrange" type="range"/>
+            </div>
+            @* Segmentation *@
+            <div class="nav-item px-3 center">
+            <h2 class="navLabel">Segmentation</h2>
+            </div>
+            <div class="nav-item px-3 center">
+                <div>
+               <button class="navbutton leftbutton">Adaptative</button><button class="navbutton rightbutton">Manual</button>
+               </div>
+            </div>
+            <div class="nav-item px-3">
+                <label class="navlabel">Range</label><input class="navrange" type="range"/>
+            </div>
+            @* Delimitation *@
+            <div class="nav-item px-3 center">
+            <h2 class="navLabel">Delimitation</h2>
+            </div>
+            <div class="nav-item px-3 center">
+            <label>
+                <input type="radio"  value="always"/>Otsu
+            </label>
+            <label>
+                <input type="radio" value="never"/>Canny
+            </label>
+            <label>
+                <input type="radio" value="costChange"/>Sobel
+            </label>
             </div>
         </nav>
     </div>
