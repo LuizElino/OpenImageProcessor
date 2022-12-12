@@ -33,6 +33,8 @@ text = "Obj:"+str(objects)
 cv2.putText(dilation, text, (10, 25),  cv2.FONT_HERSHEY_SIMPLEX,
             0.4, (240, 0, 159), 1)
 
-cv2.imwrite(os.path.join("C:/Users/elino/source/repos/PythonApplication1/ImageConvert/wwwroot/Imgs/Output/CannyEdge/" , name), dilation)
+newName = name.split(".")[0]+"Canny."+name.split(".")[1]
+cv2.imwrite(os.path.join("C:/OpenImageProcessor/ImageConvert/wwwroot/Imgs/Actual/" , newName), dilation)
+print(os.path.join(newName))
 print(objects)
 

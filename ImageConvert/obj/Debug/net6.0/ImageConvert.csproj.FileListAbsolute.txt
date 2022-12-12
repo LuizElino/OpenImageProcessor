@@ -55,3 +55,32 @@ C:\Users\elino\OneDrive\Área de Trabalho\Material de estudo\TCC PDI\PDI Project
 C:\Users\elino\OneDrive\Área de Trabalho\Material de estudo\TCC PDI\PDI Project\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ImageConvert.genruntimeconfig.cache
 C:\Users\elino\OneDrive\Área de Trabalho\Material de estudo\TCC PDI\PDI Project\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ref\ImageConvert.dll
 C:\Users\elino\OneDrive\Área de Trabalho\Material de estudo\TCC PDI\PDI Project\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\scopedcss\Pages\Counter.razor.rz.scp.css
+C:\OpenImageProcessor\ImageConvert\bin\Debug\net6.0\appsettings.Development.json
+C:\OpenImageProcessor\ImageConvert\bin\Debug\net6.0\appsettings.json
+C:\OpenImageProcessor\ImageConvert\bin\Debug\net6.0\libman.json
+C:\OpenImageProcessor\ImageConvert\bin\Debug\net6.0\ImageConvert.staticwebassets.runtime.json
+C:\OpenImageProcessor\ImageConvert\bin\Debug\net6.0\ImageConvert.exe
+C:\OpenImageProcessor\ImageConvert\bin\Debug\net6.0\ImageConvert.deps.json
+C:\OpenImageProcessor\ImageConvert\bin\Debug\net6.0\ImageConvert.runtimeconfig.json
+C:\OpenImageProcessor\ImageConvert\bin\Debug\net6.0\ImageConvert.dll
+C:\OpenImageProcessor\ImageConvert\bin\Debug\net6.0\ImageConvert.pdb
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ImageConvert.csproj.AssemblyReference.cache
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ImageConvert.GeneratedMSBuildEditorConfig.editorconfig
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ImageConvert.AssemblyInfoInputs.cache
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ImageConvert.AssemblyInfo.cs
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ImageConvert.csproj.CoreCompileInputs.cache
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ImageConvert.MvcApplicationPartsAssemblyInfo.cache
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ImageConvert.RazorAssemblyInfo.cache
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ImageConvert.RazorAssemblyInfo.cs
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\staticwebassets.build.json
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\staticwebassets.development.json
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\scopedcss\Pages\Counter.razor.rz.scp.css
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\scopedcss\Shared\MainLayout.razor.rz.scp.css
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\scopedcss\bundle\ImageConvert.styles.css
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\scopedcss\projectbundle\ImageConvert.bundle.scp.css
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ImageConvert.dll
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\refint\ImageConvert.dll
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ImageConvert.pdb
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ImageConvert.genruntimeconfig.cache
+C:\OpenImageProcessor\ImageConvert\obj\Debug\net6.0\ref\ImageConvert.dll

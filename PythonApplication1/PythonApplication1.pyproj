@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>684eac8f-ce7f-4e43-9490-5366e8741e0c</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>CannyEdge.py</StartupFile>
+    <StartupFile>PythonApplication1.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>

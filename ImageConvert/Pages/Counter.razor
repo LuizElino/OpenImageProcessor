@@ -22,55 +22,84 @@
     <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
         <nav class="flex-column">
            @*  especial features *@
-            <div class="nav-item px-3 center">
+            <div class="nav-item px-1 center">
             <h2 class="navLabel">Especial Features</h2>
             </div>
-            <div class="nav-item px-3">
-               <button class="navbutton">Make Gray</button><button class="navbutton">Count</button><button class="navbutton">Equalize</button>
+            <div class="nav-item px-1 center">
+               <label class="navlabel">
+                <input type="checkbox"  @onchange="@(e => CannyEdge(e.Value.ToString()))" value="always"/>Count
+            </label>
+            <label class="navlabel">
+                <input type="checkbox"  @onchange="@(e => Equalize(e.Value.ToString()))" value="never"/>Equalize
+            </label>
             </div>
+            <hr>
             @*  filters *@
-             <div class="nav-item px-3 center">
+             <div class="nav-item px-1 center">
             <h2 class="navLabel">Filters</h2>
             </div>
-            <div class="nav-item px-3">
-               <button class="navbutton leftbutton">Mediam</button><button class="navbutton centerbutton">Gaussian</button><button class="navbutton rightbutton">Mediana</button>
+            <div class="nav-item px-1">
+               <button class="navbutton leftbutton @MediamClicked" @onclick="MediamButton">Mediam</button><button class="navbutton centerbutton @GaussianClicked" @onclick="GaussianButton">Gaussian</button><button class="navbutton rightbutton @MedianaClicked" @onclick="MedianaButton">Mediana</button>
             </div>
-            <div class="nav-item px-3">
-                <label class="navlabel">Range</label><input class="navrange" type="range"/>
+            <div class="nav-item px-1">
+                <label class="navlabel">Range</label><input class="navrange" type="range"  min="1" max="11" value="@MediamValue" @onchange="@(e => RefreshFilter(e, ImageActualName))" step="2"/>
             </div>
+             <hr>
             @* Segmentation *@
-            <div class="nav-item px-3 center">
+            <div class="nav-item px-1 center">
             <h2 class="navLabel">Segmentation</h2>
             </div>
-            <div class="nav-item px-3 center">
+            <div class="nav-item px-1 center">
                 <div>
                <button class="navbutton leftbutton">Adaptative</button><button class="navbutton rightbutton">Manual</button>
                </div>
             </div>
-            <div class="nav-item px-3">
+            <div class="nav-item px-1">
                 <label class="navlabel">Range</label><input class="navrange" type="range"/>
             </div>
+             <hr>
             @* Delimitation *@
-            <div class="nav-item px-3 center">
+            <div class="nav-item px-1 center">
             <h2 class="navLabel">Delimitation</h2>
             </div>
-            <div class="nav-item px-3 center">
-            <label>
-                <input type="radio"  value="always"/>Otsu
+            <div class="nav-item px-1 center">
+            <label class="navlabel">
+                <input type="radio"  name="Delimitation" value="always"/>Otsu
             </label>
-            <label>
-                <input type="radio" value="never"/>Canny
+            <label class="navlabel">
+                <input type="radio"  name="Delimitation" value="never"/>Canny
             </label>
-            <label>
-                <input type="radio" value="costChange"/>Sobel
+            <label class="navlabel">
+                <input type="radio"  name="Delimitation" value="costChange"/>Sobel
             </label>
+            </div>
+             <hr>
+              @* Histogram *@
+            <div class="nav-item px-1 center">
+            @* <img class="card-img-top" src="/Imgs/Output/AdaptativeSegmentation/Histogram/1fruits.jpg" alt="Card image cap"> *@
             </div>
         </nav>
     </div>
 
 </div>
-
-<div class="container">
+@if(loadedFiles.Count > 0)
+{
+    @if (isLoading)
+    {
+        <p>Uploading...</p>
+    }
+    else
+    {
+    <div class="container">
+     
+            <img class="card-img-top" src="@(ActualPath+ImageActualName)" alt="Card image cap">
+        
+    </div>
+    }
+}
+else
+{
+<div class="container redline">
     <p>
         <label>
             Upload up to @maxAllowedFiles of up to @maxFileSize bytes:
@@ -78,9 +107,10 @@
         </label>
     </p>
 </div>
+}
 </div>
 
-@if (isLoading)
+@* @if (isLoading)
 {
     <p>Uploading...</p>
 }
@@ -434,7 +464,7 @@ else
             </div>
         }
     </ul>
-}
+} *@
 
 @code {
     private List<IBrowserFile> loadedFiles = new();
@@ -444,6 +474,7 @@ else
     public string Image = "";
     public string ImgChangePath = "";
     public string OutPutPath = "Imgs/Output/";
+    public string ActualPath = "Imgs/Actual/";
     public string InPutPath = "Imgs/Input/";
     public string histogramPath = "/Imgs/Output/Plot";
     public string EqualizedPath = "/Imgs/Output/Equalized/";
@@ -494,6 +525,7 @@ else
     //Obj count
     public int ObjectNumber = 0;
     //Values
+    public int Value = 1;
     public int MediamValue = 1;
     public int MedianaValue = 1;
     public int GaussianValue = 1;
@@ -505,6 +537,10 @@ else
     public int Threshould2Value = 101;
     private bool collapseNavMenu = true;
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    //image actual name
+    public string ImageActualName = "";
+    public string OriginalName = "";
 
     private void ToggleNavMenu()
     {
@@ -545,15 +581,18 @@ else
         ObjectNumber = 0;
     }
 
-    private void RefreshMediam(ChangeEventArgs e, string newName)
+    private void RefreshFilter(ChangeEventArgs e, string newName)
     {
         if (e.Value.ToString() != "")
         {
             if (int.Parse(e.Value.ToString()) > 0)
             {
-                MediamValue = int.Parse(e.Value.ToString());
-                HistogramRefresh(HistogramMediamPath, "Mediam", MediamValue + newName);
-                Mediam();
+                Value = int.Parse(e.Value.ToString());
+                HistogramRefresh(HistogramMediamPath, "Mediam", Value + newName);
+
+                if(MediamClickedState) Mediam();
+                else if(MedianaClickedState) Mediana();
+                else if(GaussianClickedState) Gaussian();
             }
         }
 
@@ -619,7 +658,7 @@ else
                     if(rangeType == 1)  ManualValue = int.Parse(e.Value.ToString());
                     else if(rangeType == 2)  Threshould1Value = int.Parse(e.Value.ToString());
                     else  Threshould2Value = int.Parse(e.Value.ToString());
-                   
+
                     ManualSegmentation();
                     HistogramRefresh(HistogramManualSegmentationPath, "ManualSegmentation", ManualValue.ToString() + Threshould1Value.ToString() + Threshould2Value.ToString() + newName);
                 }
@@ -659,20 +698,50 @@ else
 
     }
 
-    public void CannyEdge()
+    public void CannyEdge(string checkValue)
     {
-        ObjectNumber = int.Parse(pythonService.CannyEdge(ImgChangePath, Image).Replace("\r\n", String.Empty));
-        hasCannyEdge = true;
+        var check = checkValue;
+        string args = "";
+        if (check == "True")
+        {
+            args = pythonService.CannyEdge(ImgChangePath, Image);
+            ObjectNumber = int.Parse(args.Split("\r\n")[1]);
+            ImageActualName = args.Split("\r\n")[0];
+        }
+        else
+        {
+            ImageActualName = OriginalName;
+        }
+
     }
+    public string ImgGrayChangePath = "";
     public void ToGrayScale()
     {
-        ImgChangePath = pythonService.GetGray(ImgChangePath, Image);
-        hasGray = true;
+        var args = pythonService.GetGray(ImgChangePath, Image);
+        ImgChangePath = args.Split("\r\n")[0];
+        ImgGrayChangePath = args.Split("\r\n")[0];
+        ImageActualName = args.Split("\r\n")[1];
+        OriginalName = args.Split("\r\n")[1];
     }
-    public void Equalize()
+    public string PreviousName = "";
+    public void Equalize(string checkValue)
     {
-        HistogramEqualizedPath = pythonService.Equalize(ImgChangePath, Image);
-        hasEqualized = true;
+        var check = checkValue;
+        string args = "";
+        if(check == "True")
+        {
+            PreviousName = ImageActualName;
+            args = pythonService.Equalize(ImgChangePath, ImageActualName);
+            HistogramEqualizedPath =  args.Split("\r\n")[0];
+            ImgChangePath = args.Split("\r\n")[0];
+            ImageActualName =  args.Split("\r\n")[1];
+        }
+        else
+        {
+            ImageActualName = PreviousName;
+            ImgChangePath = ImgGrayChangePath;
+        }
+
     }
     public void Histogram(string path, string type)
     {
@@ -684,18 +753,85 @@ else
         pythonService.GenerateHistogram(path, type + "/Histogram/" + refresh);
     }
 
+    string MediamClicked = "";
+    bool MediamClickedState = false;
+    public void MediamButton()
+    {
+        MediamClickedState = !MediamClickedState;
+        if (MediamClickedState)
+        {
+            MediamClicked = "MediamClicked";
+            GaussianClicked = "";
+            GaussianClickedState = false;
+            MedianaClicked = "";
+            MedianaClickedState = false;
+            Mediam();
+        }
+        else
+        {
+            MediamClicked = "";
+        }
+    }
+
+    string MedianaClicked = "";
+    bool MedianaClickedState = false;
+    public void MedianaButton()
+    {
+        MedianaClickedState = !MedianaClickedState;
+        if (MedianaClickedState)
+        {
+            GaussianClicked = "";
+            GaussianClickedState = false;
+            MediamClicked = "";
+            MediamClickedState = false;
+            MedianaClicked = "MedianaClicked";
+            Mediana();
+        }
+        else
+        {
+            MedianaClicked = "";
+        }
+    }
+    string GaussianClicked = "";
+    bool GaussianClickedState = false;
+    public void GaussianButton()
+    {
+        GaussianClickedState = !GaussianClickedState;
+        if (GaussianClickedState)
+        {
+            MedianaClicked = "";
+            MedianaClickedState = false;
+            MediamClicked = "";
+            MediamClickedState = false;
+            GaussianClicked = "GaussianClicked";
+            Gaussian();
+        }
+        else
+        {
+            GaussianClicked = "";
+        }
+    }
     public void Mediam()
     {
-        HistogramMediamPath = pythonService.Mediam(ImgChangePath, MediamValue + Image, MediamValue);
+        var args = pythonService.Mediam(ImgChangePath, Value + Image, Value);
+        HistogramMediamPath = args.Split("\r\n")[0];
+        ImgChangePath = args.Split("\r\n")[0];
+        ImageActualName = args.Split("\r\n")[1];
     }
     public void Mediana()
     {
-        HistogramMedianaPath = pythonService.Mediana(ImgChangePath, MedianaValue + Image, MedianaValue);
+        var args = pythonService.Mediana(ImgChangePath, Value + Image, Value);
+        HistogramMediamPath = args.Split("\r\n")[0];
+        ImgChangePath = args.Split("\r\n")[0];
+        ImageActualName = args.Split("\r\n")[1];
 
     }
     public void Gaussian()
     {
-        HistogramGaussianPath = pythonService.Gaussian(ImgChangePath, GaussianValue + Image, GaussianValue);
+        var args = pythonService.Gaussian(ImgChangePath, Value + Image, Value);
+        HistogramMediamPath = args.Split("\r\n")[0];
+        ImgChangePath = args.Split("\r\n")[0];
+        ImageActualName = args.Split("\r\n")[1];
 
     }
     public void AdaptativeSegmentation()
@@ -740,8 +876,9 @@ else
                 loadedFiles.Add(file);
                 var trustedFileNameForFileStorage = file.Name;
                 Image = file.Name;
+                ImageActualName = file.Name;
                 var path = Path.Combine(Environment.ContentRootPath,
-                        "wwwroot", "Imgs", "Input",
+                        "wwwroot", "Imgs", "Actual",
                         trustedFileNameForFileStorage);
                 ImgChangePath = path;
                 await using FileStream fs = new(path, FileMode.Create);
@@ -754,6 +891,7 @@ else
             }
         }
 
+        ToGrayScale();
         isLoading = false;
     }
 }

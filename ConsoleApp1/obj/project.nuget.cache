@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BSAGlok4WVE9M4oCs18gWuMMa7hL7dQKwg8uUK9sxA9s06u3NYrCsYyDfSu688gpU2XvJ4HXwyprBJTW72yMuA==",
+  "dgSpecHash": "fTayPX4eW7kYTzQwf7mrvYCx/CkyfM8eJsmdpPyqmUZwsn+08Yb54KWPfyjpvdGQc7RXOpovikTYwFXPv6wsQg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\elino\\OneDrive\\Área de Trabalho\\Material de estudo\\TCC PDI\\PDI Project\\OpenImageProcessor\\ConsoleApp1\\ConsoleApp1.csproj",
+  "projectFilePath": "C:\\OpenImageProcessor\\ConsoleApp1\\ConsoleApp1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\elino\\.nuget\\packages\\dynamiclanguageruntime\\1.3.1\\dynamiclanguageruntime.1.3.1.nupkg.sha512",
     "C:\\Users\\elino\\.nuget\\packages\\ironpython\\2.7.12\\ironpython.2.7.12.nupkg.sha512",

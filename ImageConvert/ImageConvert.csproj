@@ -7,8 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Imgs\Output\BABUINO.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Components\" />
     <Folder Include="wwwroot\Imgs\Input\" />
+    <Folder Include="wwwroot\Imgs\Actual\" />
     <Folder Include="wwwroot\Imgs\Output\AdaptativeSegmentation\Histogram\" />
     <Folder Include="wwwroot\Imgs\Output\CannyEdge\Histogram\" />
     <Folder Include="wwwroot\Imgs\Output\Canny\Histogram\" />

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\elino\\OneDrive\\Área de Trabalho\\Material de estudo\\TCC PDI\\PDI Project\\OpenImageProcessor\\ImageConvert\\ImageConvert.csproj": {}
+    "C:\\OpenImageProcessor\\ImageConvert\\ImageConvert.csproj": {}
   },
   "projects": {
-    "C:\\Users\\elino\\OneDrive\\Área de Trabalho\\Material de estudo\\TCC PDI\\PDI Project\\OpenImageProcessor\\ImageConvert\\ImageConvert.csproj": {
+    "C:\\OpenImageProcessor\\ImageConvert\\ImageConvert.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\elino\\OneDrive\\Área de Trabalho\\Material de estudo\\TCC PDI\\PDI Project\\OpenImageProcessor\\ImageConvert\\ImageConvert.csproj",
+        "projectUniqueName": "C:\\OpenImageProcessor\\ImageConvert\\ImageConvert.csproj",
         "projectName": "ImageConvert",
-        "projectPath": "C:\\Users\\elino\\OneDrive\\Área de Trabalho\\Material de estudo\\TCC PDI\\PDI Project\\OpenImageProcessor\\ImageConvert\\ImageConvert.csproj",
+        "projectPath": "C:\\OpenImageProcessor\\ImageConvert\\ImageConvert.csproj",
         "packagesPath": "C:\\Users\\elino\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\elino\\OneDrive\\Área de Trabalho\\Material de estudo\\TCC PDI\\PDI Project\\OpenImageProcessor\\ImageConvert\\obj\\",
+        "outputPath": "C:\\OpenImageProcessor\\ImageConvert\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\elino\\AppData\\Roaming\\NuGet\\NuGet.Config",

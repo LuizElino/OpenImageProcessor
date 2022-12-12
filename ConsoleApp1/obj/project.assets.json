@@ -818,11 +818,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\elino\\OneDrive\\Área de Trabalho\\Material de estudo\\TCC PDI\\PDI Project\\OpenImageProcessor\\ConsoleApp1\\ConsoleApp1.csproj",
+      "projectUniqueName": "C:\\OpenImageProcessor\\ConsoleApp1\\ConsoleApp1.csproj",
       "projectName": "ConsoleApp1",
-      "projectPath": "C:\\Users\\elino\\OneDrive\\Área de Trabalho\\Material de estudo\\TCC PDI\\PDI Project\\OpenImageProcessor\\ConsoleApp1\\ConsoleApp1.csproj",
+      "projectPath": "C:\\OpenImageProcessor\\ConsoleApp1\\ConsoleApp1.csproj",
       "packagesPath": "C:\\Users\\elino\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\elino\\OneDrive\\Área de Trabalho\\Material de estudo\\TCC PDI\\PDI Project\\OpenImageProcessor\\ConsoleApp1\\obj\\",
+      "outputPath": "C:\\OpenImageProcessor\\ConsoleApp1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\elino\\AppData\\Roaming\\NuGet\\NuGet.Config",

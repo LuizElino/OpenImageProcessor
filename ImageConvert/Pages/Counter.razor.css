@@ -19,7 +19,7 @@
 
     .sidebar {
         width: 500px;
-        height: 100vh;
+        /* height: 100vh; */
         position: sticky;
         top: 0;
     }
@@ -28,14 +28,16 @@
 /* container image */
 
 .container {  
-    width: 100%;  
+    width: 50%;  
     height: 960px;  
-    border: 5px solid red;  
     display: flex;  
     justify-content: center;  
     align-items: center;  
     }  
 
+.redline{
+    border: 5px solid red; 
+    }
 /* navbar */
 
 .navbar-toggler {
@@ -119,7 +121,11 @@ dl, ol, ul {
     background-color:#B4B4B4; 
 }
 
-button{
+.MediamClicked, .GaussianClicked, .MedianaClicked {
+    background-color: #B4B4B4;
+}
+
+button {
     border-radius: 15px;
 }
 
@@ -150,14 +156,14 @@ button{
 
 .navlabel{
     color:white;
-    margin-right: 3%;
+    margin: 1%;
 }
 
 .navrange{
     width: 100%;
 }
 
-label{
+hr{
     color:white;
-    margin: 5%;
 }
+

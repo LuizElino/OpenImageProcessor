@@ -11,7 +11,7 @@ namespace ImageConvert.Services
 
             var psi = new ProcessStartInfo();
             psi.FileName = @"C:\Users\elino\AppData\Local\Programs\Python\Python310\python.exe";
-            var script = @"C:\Users\elino\source\repos\PythonApplication1\PythonApplication1\"+ scriptName + ".py";
+            var script = @"C:\OpenImageProcessor\PythonApplication1\" + scriptName + ".py";
 
             path = path.Replace("\r\n", String.Empty);
             psi.Arguments = script + " " + path + " " + fileName + " " + range + " " + threshold1 + " " + threshold2;

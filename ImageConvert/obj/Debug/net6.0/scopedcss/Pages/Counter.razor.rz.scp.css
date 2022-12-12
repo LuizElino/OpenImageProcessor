@@ -19,7 +19,7 @@
 
     .sidebar[b-38mf4d1mry] {
         width: 500px;
-        height: 100vh;
+        /* height: 100vh; */
         position: sticky;
         top: 0;
     }
@@ -28,14 +28,16 @@
 /* container image */
 
 .container[b-38mf4d1mry] {  
-    width: 100%;  
+    width: 50%;  
     height: 960px;  
-    border: 5px solid red;  
     display: flex;  
     justify-content: center;  
     align-items: center;  
     }  
 
+.redline[b-38mf4d1mry]{
+    border: 5px solid red; 
+    }
 /* navbar */
 
 .navbar-toggler[b-38mf4d1mry] {
@@ -119,7 +121,11 @@ dl[b-38mf4d1mry], ol[b-38mf4d1mry], ul[b-38mf4d1mry] {
     background-color:#B4B4B4; 
 }
 
-button[b-38mf4d1mry]{
+.MediamClicked[b-38mf4d1mry], .GaussianClicked[b-38mf4d1mry], .MedianaClicked[b-38mf4d1mry] {
+    background-color: #B4B4B4;
+}
+
+button[b-38mf4d1mry] {
     border-radius: 15px;
 }
 
@@ -150,14 +156,14 @@ button[b-38mf4d1mry]{
 
 .navlabel[b-38mf4d1mry]{
     color:white;
-    margin-right: 3%;
+    margin: 1%;
 }
 
 .navrange[b-38mf4d1mry]{
     width: 100%;
 }
 
-label[b-38mf4d1mry]{
+hr[b-38mf4d1mry]{
     color:white;
-    margin: 5%;
 }
+

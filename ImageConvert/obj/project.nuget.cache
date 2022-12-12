@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OTXiAiivlHRPF5hnTPjjtTwERzE55RXIsY27BF2Xd/g0dnCEGQH5gugTrAnrvspxY57tU6RFTBCQn2uAC7R1Lg==",
+  "dgSpecHash": "30fru6Gv6s4QHQoAojjPm27lKKdtqE/ZBrtX4/kdoEEFkcRb3al5n47xnutxSa2D5KG0GBh5t24/anESl4g8ZQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\elino\\OneDrive\\Área de Trabalho\\Material de estudo\\TCC PDI\\PDI Project\\OpenImageProcessor\\ImageConvert\\ImageConvert.csproj",
+  "projectFilePath": "C:\\OpenImageProcessor\\ImageConvert\\ImageConvert.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
