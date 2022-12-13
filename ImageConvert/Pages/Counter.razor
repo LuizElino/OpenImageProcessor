@@ -473,6 +473,8 @@ else
     private bool isLoading;
     public string Image = "";
     public string ImgChangePath = "";
+    public string ImgEqualizedChangePath = "";
+    public string ImgGrayChangePath = "";
     public string OutPutPath = "Imgs/Output/";
     public string ActualPath = "Imgs/Actual/";
     public string InPutPath = "Imgs/Input/";
@@ -524,6 +526,7 @@ else
     public bool ShowEqualized = false;
     //Obj count
     public int ObjectNumber = 0;
+    public bool IsEqualized = false;
     //Values
     public int Value = 1;
     public int MediamValue = 1;
@@ -537,10 +540,12 @@ else
     public int Threshould2Value = 101;
     private bool collapseNavMenu = true;
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    public int FilterType = 0;
 
     //image actual name
     public string ImageActualName = "";
     public string OriginalName = "";
+
 
     private void ToggleNavMenu()
     {
@@ -714,7 +719,6 @@ else
         }
 
     }
-    public string ImgGrayChangePath = "";
     public void ToGrayScale()
     {
         var args = pythonService.GetGray(ImgChangePath, Image);
@@ -730,18 +734,27 @@ else
         string args = "";
         if(check == "True")
         {
-            PreviousName = ImageActualName;
-            args = pythonService.Equalize(ImgChangePath, ImageActualName);
-            HistogramEqualizedPath =  args.Split("\r\n")[0];
-            ImgChangePath = args.Split("\r\n")[0];
-            ImageActualName =  args.Split("\r\n")[1];
+            IsEqualized = true;
         }
         else
         {
-            ImageActualName = PreviousName;
-            ImgChangePath = ImgGrayChangePath;
+            IsEqualized = false;
         }
+          switch (FilterType)
+            {
+                case 1:
+                    Mediam();
+                    break;
+                case 2:
+                    Mediana();
+                    break;
+                case 3:
+                    Gaussian();
+                    break;
+                case 0:
 
+                break;
+            }
     }
     public void Histogram(string path, string type)
     {
@@ -813,25 +826,44 @@ else
     }
     public void Mediam()
     {
+        FilterType = 1;
         var args = pythonService.Mediam(ImgChangePath, Value + Image, Value);
         HistogramMediamPath = args.Split("\r\n")[0];
-        ImgChangePath = args.Split("\r\n")[0];
+        //ImgEqualizedChangePath = args.Split("\r\n")[0];
         ImageActualName = args.Split("\r\n")[1];
+        if(IsEqualized)
+        {
+         var args2 = pythonService.Equalize(args.Split("\r\n")[0], ImageActualName);
+         ImageActualName =  args2.Split("\r\n")[1];
+        }
+       
     }
     public void Mediana()
     {
+        FilterType = 2;
         var args = pythonService.Mediana(ImgChangePath, Value + Image, Value);
         HistogramMediamPath = args.Split("\r\n")[0];
-        ImgChangePath = args.Split("\r\n")[0];
+        //ImgEqualizedChangePath = args.Split("\r\n")[0];
         ImageActualName = args.Split("\r\n")[1];
+        if(IsEqualized)
+        {
+         var args2 = pythonService.Equalize(args.Split("\r\n")[0], ImageActualName);
+         ImageActualName =  args2.Split("\r\n")[1];
+        }
 
     }
     public void Gaussian()
     {
+        FilterType = 3;
         var args = pythonService.Gaussian(ImgChangePath, Value + Image, Value);
         HistogramMediamPath = args.Split("\r\n")[0];
-        ImgChangePath = args.Split("\r\n")[0];
+        //ImgEqualizedChangePath = args.Split("\r\n")[0];
         ImageActualName = args.Split("\r\n")[1];
+        if(IsEqualized)
+        {
+         var args2 = pythonService.Equalize(args.Split("\r\n")[0], ImageActualName);
+         ImageActualName =  args2.Split("\r\n")[1];
+        }
 
     }
     public void AdaptativeSegmentation()
@@ -892,6 +924,10 @@ else
         }
 
         ToGrayScale();
+        var args = pythonService.Equalize(ImgChangePath, ImageActualName);
+        //HistogramEqualizedPath =  args.Split("\r\n")[0];
+        ImgEqualizedChangePath = args.Split("\r\n")[0];
+        //ImageActualName =  args.Split("\r\n")[1];
         isLoading = false;
     }
 }
