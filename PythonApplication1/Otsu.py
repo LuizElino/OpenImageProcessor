@@ -15,8 +15,10 @@ temp = img.copy()
 temp[temp > T] = 255
 temp[temp < 255] = 0
 otsu = cv2.bitwise_not(temp)
-cv2.imwrite(os.path.join("C:/Users/elino/source/repos/PythonApplication1/ImageConvert/wwwroot/Imgs/Output/Otsu/" , name), otsu)
-print(os.path.join("C:/Users/elino/source/repos/PythonApplication1/ImageConvert/wwwroot/Imgs/Output/Otsu/" , name))
+newName = name.split(".")[0]+"Otsu."+name.split(".")[1]
+cv2.imwrite(os.path.join("C:/OpenImageProcessor/ImageConvert/wwwroot/Imgs/Actual/" , newName), otsu)
+print(os.path.join("C:/OpenImageProcessor/ImageConvert/wwwroot/Imgs/Actual/" , newName))
+print(os.path.join(newName))
 
 
 

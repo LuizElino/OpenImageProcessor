@@ -24,5 +24,7 @@ temp[temp > T] = 255
 temp[temp < 255] = 0
 otsu = cv2.bitwise_not(temp)
 bordas = cv2.Canny(otsu, canny1, canny2)
-cv2.imwrite(os.path.join("C:/Users/elino/source/repos/PythonApplication1/ImageConvert/wwwroot/Imgs/Output/Canny/" , name), bordas)
-print(os.path.join("C:/Users/elino/source/repos/PythonApplication1/ImageConvert/wwwroot/Imgs/Output/Canny/" , name))
+newName = name.split(".")[0]+"Canny."+name.split(".")[1]
+cv2.imwrite(os.path.join("C:/OpenImageProcessor/ImageConvert/wwwroot/Imgs/Actual/" , newName), bordas)
+print(os.path.join("C:/OpenImageProcessor/ImageConvert/wwwroot/Imgs/Actual/" , newName))
+print(os.path.join(newName))

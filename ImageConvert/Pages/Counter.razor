@@ -10,461 +10,464 @@
 <div class="page">
     <div class="sidebar">
 
-    <div class="top-row ps-3 navbar navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="">ImageConvert</a>
-            <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <div class="top-row ps-3 navbar navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="">ImageConvert</a>
+                <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
         </div>
-    </div>
 
-    <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-        <nav class="flex-column">
-           @*  especial features *@
-            <div class="nav-item px-1 center">
-            <h2 class="navLabel">Especial Features</h2>
-            </div>
-            <div class="nav-item px-1 center">
-               <label class="navlabel">
-                <input type="checkbox"  @onchange="@(e => CannyEdge(e.Value.ToString()))" value="always"/>Count
-            </label>
-            <label class="navlabel">
-                <input type="checkbox"  @onchange="@(e => Equalize(e.Value.ToString()))" value="never"/>Equalize
-            </label>
-            </div>
-            <hr>
-            @*  filters *@
-             <div class="nav-item px-1 center">
-            <h2 class="navLabel">Filters</h2>
-            </div>
-            <div class="nav-item px-1">
-               <button class="navbutton leftbutton @MediamClicked" @onclick="MediamButton">Mediam</button><button class="navbutton centerbutton @GaussianClicked" @onclick="GaussianButton">Gaussian</button><button class="navbutton rightbutton @MedianaClicked" @onclick="MedianaButton">Mediana</button>
-            </div>
-            <div class="nav-item px-1">
-                <label class="navlabel">Range</label><input class="navrange" type="range"  min="1" max="11" value="@MediamValue" @onchange="@(e => RefreshFilter(e, ImageActualName))" step="2"/>
-            </div>
-             <hr>
-            @* Segmentation *@
-            <div class="nav-item px-1 center">
-            <h2 class="navLabel">Segmentation</h2>
-            </div>
-            <div class="nav-item px-1 center">
-                <div>
-               <button class="navbutton leftbutton">Adaptative</button><button class="navbutton rightbutton">Manual</button>
-               </div>
-            </div>
-            <div class="nav-item px-1">
-                <label class="navlabel">Range</label><input class="navrange" type="range"/>
-            </div>
-             <hr>
-            @* Delimitation *@
-            <div class="nav-item px-1 center">
-            <h2 class="navLabel">Delimitation</h2>
-            </div>
-            <div class="nav-item px-1 center">
-            <label class="navlabel">
-                <input type="radio"  name="Delimitation" value="always"/>Otsu
-            </label>
-            <label class="navlabel">
-                <input type="radio"  name="Delimitation" value="never"/>Canny
-            </label>
-            <label class="navlabel">
-                <input type="radio"  name="Delimitation" value="costChange"/>Sobel
-            </label>
-            </div>
-             <hr>
-              @* Histogram *@
-            <div class="nav-item px-1 center">
-            @* <img class="card-img-top" src="/Imgs/Output/AdaptativeSegmentation/Histogram/1fruits.jpg" alt="Card image cap"> *@
-            </div>
-        </nav>
-    </div>
+        <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+            <nav class="flex-column">
+                @*  especial features *@
+                <div class="nav-item px-1 center">
+                    <h2 class="navLabel">Especial Features</h2>
+                </div>
+                <div class="nav-item px-1 center">
+                    <label class="navlabel">
+                        <input type="checkbox" @onchange="@(e => CannyEdge(e.Value.ToString()))" value="always" />Count
+                    </label>
+                    <label class="navlabel">
+                        <input type="checkbox" @onchange="@(e => Equalize(e.Value.ToString()))" value="never" />Equalize
+                    </label>
+                </div>
+                <hr>
+                @*  filters *@
+                <div class="nav-item px-1 center">
+                    <h2 class="navLabel">Filters</h2>
+                </div>
+                <div class="nav-item px-1">
+                    <button class="navbutton leftbutton @MediamClicked" @onclick="MediamButton">Mediam</button><button class="navbutton centerbutton @GaussianClicked" @onclick="GaussianButton">Gaussian</button><button class="navbutton rightbutton @MedianaClicked" @onclick="MedianaButton">Mediana</button>
+                </div>
+                <div class="nav-item px-1">
+                    <label class="navlabel">Range</label><input class="navrange" type="range" min="1" max="11" value="@Value" @onchange="@(e => RefreshFilter(e, ImageActualName))" step="2" />
+                </div>
+                <hr>
+                @* Segmentation *@
+                <div class="nav-item px-1 center">
+                    <h2 class="navLabel">Segmentation</h2>
+                </div>
+                <div class="nav-item px-1 center">
+                    <div>
+                        <button class="navbutton leftbutton @AdaptativeClicked" @onclick="AdaptativeSegmentationButton">Adaptative</button><button class="navbutton rightbutton @ManualClicked" @onclick="ManualSegmentationButton">Manual</button>
+                    </div>
+                </div>
+                <div class="nav-item px-1">
+                    <label class="navlabel">Range</label><input class="navrange" type="range" min="1" max="251" value="@Value" @onchange="@(e => RefreshFilterSegmentation(e, ImageActualName))" step="10" />
+                </div>
+                <hr>
+                @* Delimitation *@
+                <div class="nav-item px-1 center">
+                    <h2 class="navLabel">Delimitation</h2>
+                </div>
+                <div class="nav-item px-1 center">
+                    <label class="navlabel">
+                        <input type="radio" name="Delimitation" value="always" @onclick="Otsu" />Otsu
+                    </label>
+                    <label class="navlabel">
+                        <input type="radio" name="Delimitation" value="never" @onclick="Canny" />Canny
+                    </label>
+                    <label class="navlabel">
+                        <input type="radio" name="Delimitation" value="costChange" @onclick="Sobel" />Sobel
+                    </label>
+                    <label class="navlabel">
+                        <input type="radio" name="Delimitation" value="costChange" @onclick="None" />None
+                    </label>
+                </div>
+                <hr>
+                @* Histogram *@
+                <div class="nav-item px-1 center">
+                    @* <img class="card-img-top" src="/Imgs/Output/AdaptativeSegmentation/Histogram/1fruits.jpg" alt="Card image cap"> *@
+                </div>
+            </nav>
+        </div>
 
-</div>
-@if(loadedFiles.Count > 0)
-{
-    @if (isLoading)
+    </div>
+    @if (loadedFiles.Count > 0)
     {
-        <p>Uploading...</p>
+        @if (isLoading)
+        {
+            <p>Uploading...</p>
+        }
+        else
+        {
+            <div class="container">
+
+                <img class="card-img-top" src="@(ActualPath+ImageActualName)" alt="Card image cap">
+
+            </div>
+        }
     }
     else
     {
-    <div class="container">
-     
-            <img class="card-img-top" src="@(ActualPath+ImageActualName)" alt="Card image cap">
-        
-    </div>
+        <div class="container redline">
+            <p>
+                <label>
+                    Upload up to @maxAllowedFiles of up to @maxFileSize bytes:
+                    <InputFile OnChange="@LoadFiles" multiple />
+                </label>
+            </p>
+        </div>
     }
-}
-else
-{
-<div class="container redline">
-    <p>
-        <label>
-            Upload up to @maxAllowedFiles of up to @maxFileSize bytes:
-            <InputFile OnChange="@LoadFiles" multiple />
-        </label>
-    </p>
-</div>
-}
 </div>
 
 @* @if (isLoading)
-{
+    {
     <p>Uploading...</p>
-}
-else
-{
+    }
+    else
+    {
     <ul>
-        @foreach (var file in loadedFiles)
-        {
-            <div class="container">
-                <div class="row space">
-                    <div class="col-sm">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="@(InPutPath+file.Name)" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Name: @file.Name</li>
-                                <li class="list-group-item">Last modified: @file.LastModified.ToString()</li>
-                                <li class="list-group-item">Size (bytes): @file.Size</li>
-                                <li class="list-group-item">Content type: @file.ContentType</li>
-                            </ul>
-                            <div class="card-body">
-                                <button type="button" class="btn btn-primary" @onclick="@ToGrayScale">Make Gray</button>
-                                <button type="button" class="btn btn-primary" @onclick="@CannyEdge">Count</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm">
-                        @if (hasGray)
-                        {
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="@(OutPutPath+file.Name)" alt="Card image cap">
-                                @if (ShowGray)
-                                {
-                                    <img class="card-img-top" src="@(OutPutPath+"Histogram/"+file.Name)" alt="Card image cap">
-                                }
-                                <div class="card-body">
-                                    <button type="button" class="btn btn-primary" @onclick="@(() => {ShowGray = !ShowGray; Histogram(ImgChangePath,"");})">Histogram</button>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                    <div class="col-sm">
-                        @if (hasCannyEdge)
-                        {
-
-                            <div class="card" style="width: 18rem;">
-                                <div class="card-body">
-                                    <h5 class="card-title">Objects Count: @ObjectNumber</h5>
-                                </div>
-                                <img class="card-img-top" src="@(CannyEdgePath+file.Name)" alt="Card image cap">
-                            </div>
-                        }
-                    </div>
-                </div>
-                <div class="row space">
-                    <div class="col-sm">
-                        @if (hasGray)
-                        {
-                            <div class="card" style="width: 18rem;">
-                                @if (hasEqualized)
-                                {
-                                    <img class="card-img-top" src="@(EqualizedPath+file.Name)" alt="Card image cap">
-                                }
-                                <div class="card-body">
-                                    <h5 class="card-title">Equalized Image</h5>
-                                </div>
-                                @if (ShowEqualized)
-                                {
-                                    <img class="card-img-top" src="@(EqualizedPath+"Histogram/"+file.Name)" alt="Card image cap">
-                                }
-                                <div class="card-body">
-                                    <button type="button" class="btn btn-primary" @onclick="@Equalize">Make Equalized</button>
-                                    @if (hasEqualized)
-                                    {
-                                        <button type="button" class="btn btn-primary" @onclick="@(() => {ShowEqualized = !ShowEqualized;Histogram(HistogramEqualizedPath,"Equalized");})">Histogram</button>
-                                    }
-                                </div>
-
-                            </div>
-                        }
-                    </div>
-                    <div class="col-sm">
-                        @if (hasGray)
-                        {
-                            <div class="card" style="width: 18rem;">
-                                @if (hasMediam)
-                                {
-                                    <img class="card-img-top" src="@(MediamPath+MediamValue+file.Name)" alt="Card image cap">
-                                }
-
-                                <div class="card-body">
-                                    <h5 class="card-title">Mediam: </h5>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Range</span>
-                                        </div>
-                                        <input type="number" min="1" step="2" value="@MediamValue" @oninput="@(e => RefreshMediam(e, file.Name))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
-                                    </div>
-                                </div>
-                                @if (ShowMediam)
-                                {
-                                    <img class="card-img-top" src="@(MediamPath+"Histogram/"+MediamValue+file.Name)" alt="Card image cap">
-                                }
-                                <div class="card-body">
-                                    <button type="button" class="btn btn-primary" @onclick="@(() => {hasMediam = !hasMediam;if(hasMediam){Mediam();}})">Make Mediam</button>
-                                    @if (hasMediam)
-                                    {
-                                        <button type="button" class="btn btn-primary" @onclick="@(() => {ShowMediam = !ShowMediam;if(ShowMediam){HistogramRefresh(HistogramMediamPath,"Mediam", MediamValue+file.Name);}})">Histogram</button>
-                                    }
-                                </div>
-                            </div>
-                        }
-                    </div>
-                    <div class="col-sm">
-                        @if (hasGray)
-                        {
-                            <div class="card" style="width: 18rem;">
-                                @if (hasMediaana)
-                                {
-                                    <img class="card-img-top" src="@(MedianaPath+MedianaValue+file.Name)" alt="Card image cap">
-                                }
-
-                                <div class="card-body">
-                                    <h5 class="card-title">Mediana Image</h5>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Range</span>
-                                        </div>
-                                        <input type="number" min="1"  step="2" value="@MedianaValue" @oninput="@(e => RefreshMediana(e, file.Name))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
-                                    </div>
-                                </div>
-                                @if (ShowMediana)
-                                {
-                                    <img class="card-img-top" src="@(MedianaPath+"Histogram/"+MedianaValue+file.Name)" alt="Card image cap">
-                                }
-                                <div class="card-body">
-                                    <button type="button" class="btn btn-primary" @onclick="@(() => {hasMediaana = !hasMediaana;if(hasMediaana){Mediana();}})">Make Mediana</button>
-                                    @if (hasMediaana)
-                                    {
-                                        <button type="button" class="btn btn-primary" @onclick="@(() => {ShowMediana =!ShowMediana;if(ShowMediana){HistogramRefresh(HistogramMedianaPath,"Mediana", MedianaValue+file.Name);}})">Histogram</button>
-                                    }
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-                <div class="row space">
-                    <div class="col-sm">
-                        @if (hasGray)
-                        {
-                            <div class="card" style="width: 18rem;">
-                                @if (hasGaussian)
-                                {
-                                    <img class="card-img-top" src="@(GaussianPath+GaussianValue+file.Name)" alt="Card image cap">
-                                }
-
-                                <div class="card-body">
-                                    <h5 class="card-title">Gaussian Image</h5>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Range</span>
-                                        </div>
-                                        <input type="number" min="1"  step="2" value="@GaussianValue" @oninput="@(e => RefreshGaussian(e, file.Name))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
-                                    </div>
-                                </div>
-                                @if (ShowGaussian)
-                                {
-                                    <img class="card-img-top" src="@(GaussianPath+"Histogram/"+GaussianValue+file.Name)" alt="Card image cap">
-                                }
-                                <div class="card-body">
-                                    <button type="button" class="btn btn-primary" @onclick="@(() => {hasGaussian = !hasGaussian;if(hasGaussian){Gaussian();}})">Make Gaussian</button>
-                                    @if (hasGaussian)
-                                    {
-                                        <button type="button" class="btn btn-primary" @onclick="@(() => {ShowGaussian = !ShowGaussian;HistogramRefresh(HistogramGaussianPath,"Gaussian",GaussianValue+file.Name);})">Histogram</button>
-                                    }
-                                </div>
-                            </div>
-                        }
-                    </div>
-                    <div class="col-sm">
-                        @if (hasGray)
-                        {
-                            <div class="card" style="width: 18rem;">
-                                @if (hasAdaptativeSegmentation)
-                                {
-                                    <img class="card-img-top" src="@(AdaptativeSegmentationPath+AdaptativeValue+file.Name)" alt="Card image cap">
-                                }
-
-                                <div class="card-body">
-                                    <h5 class="card-title">Adaptative Segmentation Image</h5>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Range</span>
-                                        </div>
-                                        <input type="number" min="1" step="2" value="@AdaptativeValue" @oninput="@(e => RefreshAdaptative(e, file.Name))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
-                                    </div>
-                                </div>
-                                @if (ShowAdaptative)
-                                {
-                                    <img class="card-img-top" src="@(AdaptativeSegmentationPath+"Histogram/"+AdaptativeValue+file.Name)" alt="Card image cap">
-                                }
-                                <div class="card-body">
-                                    <button type="button" class="btn btn-primary" @onclick="@(() => {hasAdaptativeSegmentation = !hasAdaptativeSegmentation;if(hasAdaptativeSegmentation){AdaptativeSegmentation();}})">Make Adaptative Segmentation</button>
-                                    @if (hasAdaptativeSegmentation)
-                                    {
-                                        <button type="button" class="btn btn-primary" @onclick="@(() => {ShowAdaptative = !ShowAdaptative;if(ShowAdaptative){HistogramRefresh(HistogramAdaptativeSegmentationPath,"AdaptativeSegmentation",AdaptativeValue+file.Name);}})">Histogram</button>
-                                    }
-                                </div>
-                            </div>
-                        }
-                    </div>
-                    <div class="col-sm">
-                        @if (hasGray)
-                        {
-                            <div class="card" style="width: 18rem;">
-                                @if (hasManualSegmentation)
-                                {
-                                    <img class="card-img-top" src="@(ManualSegmentationPath+ManualValue+Threshould1Value+Threshould2Value+file.Name)" alt="Card image cap">
-                                }
-
-                                <div class="card-body">
-                                    <h5 class="card-title">Manual Segmentation Image</h5>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon1">Blur</span>
-                                            </div>
-                                            <input type="number"min="1" step="2" max="255" value="@ManualValue" @oninput="@(e => RefreshManual(e, file.Name,1))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon1">Threshold 1:</span>
-                                            </div>
-                                            <input type="number"min="1" step="10" max="255" value="@Threshould1Value" @oninput="@(e => RefreshManual(e, file.Name,2))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
-                                         </div>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon1">Threshould 2:</span>
-                                            </div>
-                                            <input type="number" min="1" step="10" max="255"value="@Threshould2Value" @oninput="@(e => RefreshManual(e, file.Name,3))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
-                                         </div>
-                                </div>
-                                @if (ShowManual)
-                                {
-                                    <img class="card-img-top" src="@(ManualSegmentationPath+"Histogram/"+ManualValue+Threshould1Value+Threshould2Value+file.Name)" alt="Card image cap">
-                                }
-                                <div class="card-body">
-                                    <button type="button" class="btn btn-primary" @onclick="@(() => {hasManualSegmentation = !hasManualSegmentation;if(hasManualSegmentation){ManualSegmentation();}})">Make Manual Segmentation</button>
-                                    @if (hasManualSegmentation)
-                                    {
-                                        <button type="button" class="btn btn-primary" @onclick="@(() => {ShowManual = !ShowManual;if(ShowManual){HistogramRefresh(HistogramManualSegmentationPath,"ManualSegmentation", ManualValue.ToString() + Threshould1Value.ToString() + Threshould2Value.ToString()+file.Name);}})">Histogram</button>
-                                    }
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-                <div class="row space">
-                    <div class="col-sm">
-                        @if (hasGray)
-                        {
-                            <div class="card" style="width: 18rem;">
-                                @if (hasOtsu)
-                                {
-                                    <img class="card-img-top" src="@(OtsuPath+OtsuValue+file.Name)" alt="Card image cap">
-                                }
-
-                                <div class="card-body">
-                                    <h5 class="card-title">Otsu Image</h5>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Range</span>
-                                        </div>
-                                        <input type="number" min="1"  step="2" value="@OtsuValue" @oninput="@(e => RefreshOtsu(e, file.Name))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
-                                    </div>
-                                </div>
-                                @if (ShowOtsu)
-                                {
-                                    <img class="card-img-top" src="@(OtsuPath+"Histogram/"+OtsuValue+file.Name)" alt="Card image cap">
-                                }
-                                <div class="card-body">
-                                    <button type="button" class="btn btn-primary" @onclick="@(() => {hasOtsu = !hasOtsu;if(hasOtsu){Otsu();}})">Make Otsu</button>
-                                    @if (hasOtsu)
-                                    {
-                                        <button type="button" class="btn btn-primary" @onclick="@(() => {ShowOtsu =!ShowOtsu;if(ShowOtsu){HistogramRefresh(HistogramOtsuPath,"Otsu",OtsuValue+file.Name);}})">Histogram</button>
-                                    }
-                                </div>
-                            </div>
-                        }
-                    </div>
-                    <div class="col-sm">
-                        @if (hasGray)
-                        {
-                            <div class="card" style="width: 18rem;">
-                                @if (hasCanny)
-                                {
-                                    <img class="card-img-top" src="@(CannyPath+file.Name)" alt="Card image cap">
-                                }
-
-                                <div class="card-body">
-                                    <h5 class="card-title">Canny Image</h5>
-                                </div>
-                                @if (ShowCanny)
-                                {
-                                    <img class="card-img-top" src="@(CannyPath+"Histogram/"+file.Name)" alt="Card image cap">
-                                }
-                                <div class="card-body">
-                                    <button type="button" class="btn btn-primary" @onclick="@(() => {hasCanny = !hasCanny;if(hasCanny){Canny();}})">Make Canny</button>
-                                    @if (hasCanny)
-                                    {
-                                        <button type="button" class="btn btn-primary" @onclick="@(() => {ShowCanny = !ShowCanny;if(ShowCanny){Histogram(HistogramCannyPath,"Canny");}})">Histogram</button>
-                                    }
-                                </div>
-                            </div>
-                        }
-                    </div>
-                    <div class="col-sm">
-                        @if (hasGray)
-                        {
-                            <div class="card" style="width: 18rem;">
-                                @if (hasSobel)
-                                {
-                                    <img class="card-img-top" src="@(SobelPath+SobelValue+file.Name)" alt="Card image cap">
-                                }
-
-                                <div class="card-body">
-                                    <h5 class="card-title">Sobel Image</h5>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Range</span>
-                                        </div>
-                                        <input type="number" min="1" step="2" value="@SobelValue" @oninput="@(e => RefreshSobel(e, file.Name))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
-                                    </div>
-                                </div>
-                                @if (ShowSobel)
-                                {
-                                    <img class="card-img-top" src="@(SobelPath+"Histogram/"+SobelValue+file.Name)" alt="Card image cap">
-                                }
-                                <div class="card-body">
-                                    <button type="button" class="btn btn-primary" @onclick="@(() => {hasSobel =! hasSobel;if(hasSobel){Sobel();}})">Make Sobel</button>
-                                    @if (hasSobel)
-                                    {
-                                        <button type="button" class="btn btn-primary" @onclick="@(() => {ShowSobel = !ShowSobel;if(ShowSobel){HistogramRefresh(HistogramSobelPath,"Sobel",SobelValue+file.Name);}})">Histogram</button>
-                                    }
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-        }
+    @foreach (var file in loadedFiles)
+    {
+    <div class="container">
+    <div class="row space">
+    <div class="col-sm">
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="@(InPutPath+file.Name)" alt="Card image cap">
+    <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">Name: @file.Name</li>
+    <li class="list-group-item">Last modified: @file.LastModified.ToString()</li>
+    <li class="list-group-item">Size (bytes): @file.Size</li>
+    <li class="list-group-item">Content type: @file.ContentType</li>
     </ul>
-} *@
+    <div class="card-body">
+    <button type="button" class="btn btn-primary" @onclick="@ToGrayScale">Make Gray</button>
+    <button type="button" class="btn btn-primary" @onclick="@CannyEdge">Count</button>
+    </div>
+    </div>
+    </div>
+    <div class="col-sm">
+    @if (hasGray)
+    {
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="@(OutPutPath+file.Name)" alt="Card image cap">
+    @if (ShowGray)
+    {
+    <img class="card-img-top" src="@(OutPutPath+"Histogram/"+file.Name)" alt="Card image cap">
+    }
+    <div class="card-body">
+    <button type="button" class="btn btn-primary" @onclick="@(() => {ShowGray = !ShowGray; Histogram(ImgChangePath,"");})">Histogram</button>
+    </div>
+    </div>
+    }
+    </div>
+    <div class="col-sm">
+    @if (hasCannyEdge)
+    {
+
+    <div class="card" style="width: 18rem;">
+    <div class="card-body">
+    <h5 class="card-title">Objects Count: @ObjectNumber</h5>
+    </div>
+    <img class="card-img-top" src="@(CannyEdgePath+file.Name)" alt="Card image cap">
+    </div>
+    }
+    </div>
+    </div>
+    <div class="row space">
+    <div class="col-sm">
+    @if (hasGray)
+    {
+    <div class="card" style="width: 18rem;">
+    @if (hasEqualized)
+    {
+    <img class="card-img-top" src="@(EqualizedPath+file.Name)" alt="Card image cap">
+    }
+    <div class="card-body">
+    <h5 class="card-title">Equalized Image</h5>
+    </div>
+    @if (ShowEqualized)
+    {
+    <img class="card-img-top" src="@(EqualizedPath+"Histogram/"+file.Name)" alt="Card image cap">
+    }
+    <div class="card-body">
+    <button type="button" class="btn btn-primary" @onclick="@Equalize">Make Equalized</button>
+    @if (hasEqualized)
+    {
+    <button type="button" class="btn btn-primary" @onclick="@(() => {ShowEqualized = !ShowEqualized;Histogram(HistogramEqualizedPath,"Equalized");})">Histogram</button>
+    }
+    </div>
+
+    </div>
+    }
+    </div>
+    <div class="col-sm">
+    @if (hasGray)
+    {
+    <div class="card" style="width: 18rem;">
+    @if (hasMediam)
+    {
+    <img class="card-img-top" src="@(MediamPath+MediamValue+file.Name)" alt="Card image cap">
+    }
+
+    <div class="card-body">
+    <h5 class="card-title">Mediam: </h5>
+    <div class="input-group mb-3">
+    <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Range</span>
+    </div>
+    <input type="number" min="1" step="2" value="@MediamValue" @oninput="@(e => RefreshMediam(e, file.Name))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
+    </div>
+    </div>
+    @if (ShowMediam)
+    {
+    <img class="card-img-top" src="@(MediamPath+"Histogram/"+MediamValue+file.Name)" alt="Card image cap">
+    }
+    <div class="card-body">
+    <button type="button" class="btn btn-primary" @onclick="@(() => {hasMediam = !hasMediam;if(hasMediam){Mediam();}})">Make Mediam</button>
+    @if (hasMediam)
+    {
+    <button type="button" class="btn btn-primary" @onclick="@(() => {ShowMediam = !ShowMediam;if(ShowMediam){HistogramRefresh(HistogramMediamPath,"Mediam", MediamValue+file.Name);}})">Histogram</button>
+    }
+    </div>
+    </div>
+    }
+    </div>
+    <div class="col-sm">
+    @if (hasGray)
+    {
+    <div class="card" style="width: 18rem;">
+    @if (hasMediaana)
+    {
+    <img class="card-img-top" src="@(MedianaPath+MedianaValue+file.Name)" alt="Card image cap">
+    }
+
+    <div class="card-body">
+    <h5 class="card-title">Mediana Image</h5>
+    <div class="input-group mb-3">
+    <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Range</span>
+    </div>
+    <input type="number" min="1"  step="2" value="@MedianaValue" @oninput="@(e => RefreshMediana(e, file.Name))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
+    </div>
+    </div>
+    @if (ShowMediana)
+    {
+    <img class="card-img-top" src="@(MedianaPath+"Histogram/"+MedianaValue+file.Name)" alt="Card image cap">
+    }
+    <div class="card-body">
+    <button type="button" class="btn btn-primary" @onclick="@(() => {hasMediaana = !hasMediaana;if(hasMediaana){Mediana();}})">Make Mediana</button>
+    @if (hasMediaana)
+    {
+    <button type="button" class="btn btn-primary" @onclick="@(() => {ShowMediana =!ShowMediana;if(ShowMediana){HistogramRefresh(HistogramMedianaPath,"Mediana", MedianaValue+file.Name);}})">Histogram</button>
+    }
+    </div>
+    </div>
+    }
+    </div>
+    </div>
+    <div class="row space">
+    <div class="col-sm">
+    @if (hasGray)
+    {
+    <div class="card" style="width: 18rem;">
+    @if (hasGaussian)
+    {
+    <img class="card-img-top" src="@(GaussianPath+GaussianValue+file.Name)" alt="Card image cap">
+    }
+
+    <div class="card-body">
+    <h5 class="card-title">Gaussian Image</h5>
+    <div class="input-group mb-3">
+    <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Range</span>
+    </div>
+    <input type="number" min="1"  step="2" value="@GaussianValue" @oninput="@(e => RefreshGaussian(e, file.Name))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
+    </div>
+    </div>
+    @if (ShowGaussian)
+    {
+    <img class="card-img-top" src="@(GaussianPath+"Histogram/"+GaussianValue+file.Name)" alt="Card image cap">
+    }
+    <div class="card-body">
+    <button type="button" class="btn btn-primary" @onclick="@(() => {hasGaussian = !hasGaussian;if(hasGaussian){Gaussian();}})">Make Gaussian</button>
+    @if (hasGaussian)
+    {
+    <button type="button" class="btn btn-primary" @onclick="@(() => {ShowGaussian = !ShowGaussian;HistogramRefresh(HistogramGaussianPath,"Gaussian",GaussianValue+file.Name);})">Histogram</button>
+    }
+    </div>
+    </div>
+    }
+    </div>
+    <div class="col-sm">
+    @if (hasGray)
+    {
+    <div class="card" style="width: 18rem;">
+    @if (hasAdaptativeSegmentation)
+    {
+    <img class="card-img-top" src="@(AdaptativeSegmentationPath+AdaptativeValue+file.Name)" alt="Card image cap">
+    }
+
+    <div class="card-body">
+    <h5 class="card-title">Adaptative Segmentation Image</h5>
+    <div class="input-group mb-3">
+    <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Range</span>
+    </div>
+    <input type="number" min="1" step="2" value="@AdaptativeValue" @oninput="@(e => RefreshAdaptative(e, file.Name))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
+    </div>
+    </div>
+    @if (ShowAdaptative)
+    {
+    <img class="card-img-top" src="@(AdaptativeSegmentationPath+"Histogram/"+AdaptativeValue+file.Name)" alt="Card image cap">
+    }
+    <div class="card-body">
+    <button type="button" class="btn btn-primary" @onclick="@(() => {hasAdaptativeSegmentation = !hasAdaptativeSegmentation;if(hasAdaptativeSegmentation){AdaptativeSegmentation();}})">Make Adaptative Segmentation</button>
+    @if (hasAdaptativeSegmentation)
+    {
+    <button type="button" class="btn btn-primary" @onclick="@(() => {ShowAdaptative = !ShowAdaptative;if(ShowAdaptative){HistogramRefresh(HistogramAdaptativeSegmentationPath,"AdaptativeSegmentation",AdaptativeValue+file.Name);}})">Histogram</button>
+    }
+    </div>
+    </div>
+    }
+    </div>
+    <div class="col-sm">
+    @if (hasGray)
+    {
+    <div class="card" style="width: 18rem;">
+    @if (hasManualSegmentation)
+    {
+    <img class="card-img-top" src="@(ManualSegmentationPath+ManualValue+Threshould1Value+Threshould2Value+file.Name)" alt="Card image cap">
+    }
+
+    <div class="card-body">
+    <h5 class="card-title">Manual Segmentation Image</h5>
+    <div class="input-group mb-3">
+    <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Blur</span>
+    </div>
+    <input type="number"min="1" step="2" max="255" value="@ManualValue" @oninput="@(e => RefreshManual(e, file.Name,1))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group mb-3">
+    <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Threshold 1:</span>
+    </div>
+    <input type="number"min="1" step="10" max="255" value="@Threshould1Value" @oninput="@(e => RefreshManual(e, file.Name,2))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group mb-3">
+    <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Threshould 2:</span>
+    </div>
+    <input type="number" min="1" step="10" max="255"value="@Threshould2Value" @oninput="@(e => RefreshManual(e, file.Name,3))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
+    </div>
+    </div>
+    @if (ShowManual)
+    {
+    <img class="card-img-top" src="@(ManualSegmentationPath+"Histogram/"+ManualValue+Threshould1Value+Threshould2Value+file.Name)" alt="Card image cap">
+    }
+    <div class="card-body">
+    <button type="button" class="btn btn-primary" @onclick="@(() => {hasManualSegmentation = !hasManualSegmentation;if(hasManualSegmentation){ManualSegmentation();}})">Make Manual Segmentation</button>
+    @if (hasManualSegmentation)
+    {
+    <button type="button" class="btn btn-primary" @onclick="@(() => {ShowManual = !ShowManual;if(ShowManual){HistogramRefresh(HistogramManualSegmentationPath,"ManualSegmentation", ManualValue.ToString() + Threshould1Value.ToString() + Threshould2Value.ToString()+file.Name);}})">Histogram</button>
+    }
+    </div>
+    </div>
+    }
+    </div>
+    </div>
+    <div class="row space">
+    <div class="col-sm">
+    @if (hasGray)
+    {
+    <div class="card" style="width: 18rem;">
+    @if (hasOtsu)
+    {
+    <img class="card-img-top" src="@(OtsuPath+OtsuValue+file.Name)" alt="Card image cap">
+    }
+
+    <div class="card-body">
+    <h5 class="card-title">Otsu Image</h5>
+    <div class="input-group mb-3">
+    <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Range</span>
+    </div>
+    <input type="number" min="1"  step="2" value="@OtsuValue" @oninput="@(e => RefreshOtsu(e, file.Name))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
+    </div>
+    </div>
+    @if (ShowOtsu)
+    {
+    <img class="card-img-top" src="@(OtsuPath+"Histogram/"+OtsuValue+file.Name)" alt="Card image cap">
+    }
+    <div class="card-body">
+    <button type="button" class="btn btn-primary" @onclick="@(() => {hasOtsu = !hasOtsu;if(hasOtsu){Otsu();}})">Make Otsu</button>
+    @if (hasOtsu)
+    {
+    <button type="button" class="btn btn-primary" @onclick="@(() => {ShowOtsu =!ShowOtsu;if(ShowOtsu){HistogramRefresh(HistogramOtsuPath,"Otsu",OtsuValue+file.Name);}})">Histogram</button>
+    }
+    </div>
+    </div>
+    }
+    </div>
+    <div class="col-sm">
+    @if (hasGray)
+    {
+    <div class="card" style="width: 18rem;">
+    @if (hasCanny)
+    {
+    <img class="card-img-top" src="@(CannyPath+file.Name)" alt="Card image cap">
+    }
+
+    <div class="card-body">
+    <h5 class="card-title">Canny Image</h5>
+    </div>
+    @if (ShowCanny)
+    {
+    <img class="card-img-top" src="@(CannyPath+"Histogram/"+file.Name)" alt="Card image cap">
+    }
+    <div class="card-body">
+    <button type="button" class="btn btn-primary" @onclick="@(() => {hasCanny = !hasCanny;if(hasCanny){Canny();}})">Make Canny</button>
+    @if (hasCanny)
+    {
+    <button type="button" class="btn btn-primary" @onclick="@(() => {ShowCanny = !ShowCanny;if(ShowCanny){Histogram(HistogramCannyPath,"Canny");}})">Histogram</button>
+    }
+    </div>
+    </div>
+    }
+    </div>
+    <div class="col-sm">
+    @if (hasGray)
+    {
+    <div class="card" style="width: 18rem;">
+    @if (hasSobel)
+    {
+    <img class="card-img-top" src="@(SobelPath+SobelValue+file.Name)" alt="Card image cap">
+    }
+
+    <div class="card-body">
+    <h5 class="card-title">Sobel Image</h5>
+    <div class="input-group mb-3">
+    <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Range</span>
+    </div>
+    <input type="number" min="1" step="2" value="@SobelValue" @oninput="@(e => RefreshSobel(e, file.Name))" class="form-control" placeholder="number" aria-label="number" aria-describedby="basic-addon1">
+    </div>
+    </div>
+    @if (ShowSobel)
+    {
+    <img class="card-img-top" src="@(SobelPath+"Histogram/"+SobelValue+file.Name)" alt="Card image cap">
+    }
+    <div class="card-body">
+    <button type="button" class="btn btn-primary" @onclick="@(() => {hasSobel =! hasSobel;if(hasSobel){Sobel();}})">Make Sobel</button>
+    @if (hasSobel)
+    {
+    <button type="button" class="btn btn-primary" @onclick="@(() => {ShowSobel = !ShowSobel;if(ShowSobel){HistogramRefresh(HistogramSobelPath,"Sobel",SobelValue+file.Name);}})">Histogram</button>
+    }
+    </div>
+    </div>
+    }
+    </div>
+    </div>
+    </div>
+    }
+    </ul>
+    } *@
 
 @code {
     private List<IBrowserFile> loadedFiles = new();
@@ -527,8 +530,10 @@ else
     //Obj count
     public int ObjectNumber = 0;
     public bool IsEqualized = false;
+    public string DelimitationType = "";
     //Values
     public int Value = 1;
+    public int ValueSegmentation = 1;
     public int MediamValue = 1;
     public int MedianaValue = 1;
     public int GaussianValue = 1;
@@ -595,9 +600,26 @@ else
                 Value = int.Parse(e.Value.ToString());
                 HistogramRefresh(HistogramMediamPath, "Mediam", Value + newName);
 
-                if(MediamClickedState) Mediam();
-                else if(MedianaClickedState) Mediana();
-                else if(GaussianClickedState) Gaussian();
+                if (MediamClickedState) Mediam();
+                else if (MedianaClickedState) Mediana();
+                else if (GaussianClickedState) Gaussian();
+            }
+        }
+
+
+    }
+
+    private void RefreshFilterSegmentation(ChangeEventArgs e, string newName)
+    {
+        if (e.Value.ToString() != "")
+        {
+            if (int.Parse(e.Value.ToString()) > 0)
+            {
+                ValueSegmentation = int.Parse(e.Value.ToString());
+                HistogramRefresh(HistogramMediamPath, "Mediam", Value + newName);
+
+                if (AdaptativeClickedState) AdaptativeSegmentation();
+                else if (ManualClickedState) ManualSegmentation();
             }
         }
 
@@ -660,9 +682,9 @@ else
             {
                 if (int.Parse(e.Value.ToString()) % 2 != 0)
                 {
-                    if(rangeType == 1)  ManualValue = int.Parse(e.Value.ToString());
-                    else if(rangeType == 2)  Threshould1Value = int.Parse(e.Value.ToString());
-                    else  Threshould2Value = int.Parse(e.Value.ToString());
+                    if (rangeType == 1) ManualValue = int.Parse(e.Value.ToString());
+                    else if (rangeType == 2) Threshould1Value = int.Parse(e.Value.ToString());
+                    else Threshould2Value = int.Parse(e.Value.ToString());
 
                     ManualSegmentation();
                     HistogramRefresh(HistogramManualSegmentationPath, "ManualSegmentation", ManualValue.ToString() + Threshould1Value.ToString() + Threshould2Value.ToString() + newName);
@@ -690,7 +712,8 @@ else
     private void RefreshSobel(ChangeEventArgs e, string newName)
     {
         if (e.Value.ToString() != "")
-        { if (int.Parse(e.Value.ToString()) > 0)
+        {
+            if (int.Parse(e.Value.ToString()) > 0)
             {
                 if (int.Parse(e.Value.ToString()) % 2 != 0)
                 {
@@ -732,7 +755,7 @@ else
     {
         var check = checkValue;
         string args = "";
-        if(check == "True")
+        if (check == "True")
         {
             IsEqualized = true;
         }
@@ -740,21 +763,21 @@ else
         {
             IsEqualized = false;
         }
-          switch (FilterType)
-            {
-                case 1:
-                    Mediam();
-                    break;
-                case 2:
-                    Mediana();
-                    break;
-                case 3:
-                    Gaussian();
-                    break;
-                case 0:
+        switch (FilterType)
+        {
+            case 1:
+                Mediam();
+                break;
+            case 2:
+                Mediana();
+                break;
+            case 3:
+                Gaussian();
+                break;
+            case 0:
 
                 break;
-            }
+        }
     }
     public void Histogram(string path, string type)
     {
@@ -764,6 +787,42 @@ else
     public void HistogramRefresh(string path, string type, string refresh = "")
     {
         pythonService.GenerateHistogram(path, type + "/Histogram/" + refresh);
+    }
+
+    string AdaptativeClicked = "";
+    bool AdaptativeClickedState = false;
+    public void AdaptativeSegmentationButton()
+    {
+        AdaptativeClickedState = !AdaptativeClickedState;
+        if (AdaptativeClickedState)
+        {
+            AdaptativeClicked = "MediamClicked";
+            ManualClicked = "";
+            ManualClickedState = false;
+            AdaptativeSegmentation();
+        }
+        else
+        {
+            AdaptativeClicked = "";
+        }
+    }
+
+    string ManualClicked = "";
+    bool ManualClickedState = false;
+    public void ManualSegmentationButton()
+    {
+        ManualClickedState = !ManualClickedState;
+        if (ManualClickedState)
+        {
+            ManualClicked = "MediamClicked";
+            AdaptativeClicked = "";
+            AdaptativeClickedState = false;
+            ManualSegmentation();
+        }
+        else
+        {
+            ManualClicked = "";
+        }
     }
 
     string MediamClicked = "";
@@ -831,12 +890,33 @@ else
         HistogramMediamPath = args.Split("\r\n")[0];
         //ImgEqualizedChangePath = args.Split("\r\n")[0];
         ImageActualName = args.Split("\r\n")[1];
-        if(IsEqualized)
+        if (IsEqualized)
         {
-         var args2 = pythonService.Equalize(args.Split("\r\n")[0], ImageActualName);
-         ImageActualName =  args2.Split("\r\n")[1];
+            args = pythonService.Equalize(args.Split("\r\n")[0], ImageActualName);
+            ImageActualName = args.Split("\r\n")[1];
         }
-       
+        switch (DelimitationType)
+        {
+            case "Otsu":
+                var otsu = pythonService.Otsu(args.Split("\r\n")[0], Value + Image, OtsuValue);
+                HistogramAdaptativeSegmentationPath = otsu.Split("\r\n")[0];
+                ImageActualName = otsu.Split("\r\n")[1];
+                break;
+            case "Sobel":
+                var sobel = pythonService.Sobel(args.Split("\r\n")[0], Value + Image, SobelValue);
+                HistogramAdaptativeSegmentationPath = sobel.Split("\r\n")[0];
+                ImageActualName = sobel.Split("\r\n")[1];
+                break;
+            case "Canny":
+                var canny = pythonService.Canny(args.Split("\r\n")[0], Value + Image, 15, 100, 200);
+                HistogramAdaptativeSegmentationPath = canny.Split("\r\n")[0];
+                ImageActualName = canny.Split("\r\n")[1];
+                break;
+            case "None":
+
+                break;
+        }
+
     }
     public void Mediana()
     {
@@ -845,10 +925,31 @@ else
         HistogramMediamPath = args.Split("\r\n")[0];
         //ImgEqualizedChangePath = args.Split("\r\n")[0];
         ImageActualName = args.Split("\r\n")[1];
-        if(IsEqualized)
+        if (IsEqualized)
         {
-         var args2 = pythonService.Equalize(args.Split("\r\n")[0], ImageActualName);
-         ImageActualName =  args2.Split("\r\n")[1];
+            args = pythonService.Equalize(args.Split("\r\n")[0], ImageActualName);
+            ImageActualName = args.Split("\r\n")[1];
+        }
+        switch (DelimitationType)
+        {
+            case "Otsu":
+                var otsu = pythonService.Otsu(args.Split("\r\n")[0], Value + Image, OtsuValue);
+                HistogramAdaptativeSegmentationPath = otsu.Split("\r\n")[0];
+                ImageActualName = otsu.Split("\r\n")[1];
+                break;
+            case "Sobel":
+                var sobel = pythonService.Sobel(args.Split("\r\n")[0], Value + Image, SobelValue);
+                HistogramAdaptativeSegmentationPath = sobel.Split("\r\n")[0];
+                ImageActualName = sobel.Split("\r\n")[1];
+                break;
+            case "Canny":
+                var canny = pythonService.Canny(args.Split("\r\n")[0], Value + Image, 15, 100, 200);
+                HistogramAdaptativeSegmentationPath = canny.Split("\r\n")[0];
+                ImageActualName = canny.Split("\r\n")[1];
+                break;
+            case "None":
+
+                break;
         }
 
     }
@@ -859,40 +960,128 @@ else
         HistogramMediamPath = args.Split("\r\n")[0];
         //ImgEqualizedChangePath = args.Split("\r\n")[0];
         ImageActualName = args.Split("\r\n")[1];
-        if(IsEqualized)
+        if (IsEqualized)
         {
-         var args2 = pythonService.Equalize(args.Split("\r\n")[0], ImageActualName);
-         ImageActualName =  args2.Split("\r\n")[1];
+            args = pythonService.Equalize(args.Split("\r\n")[0], ImageActualName);
+            ImageActualName = args.Split("\r\n")[1];
         }
+        switch (DelimitationType)
+        {
+            case "Otsu":
+                var otsu = pythonService.Otsu(args.Split("\r\n")[0], Value + Image, OtsuValue);
+                HistogramAdaptativeSegmentationPath = otsu.Split("\r\n")[0];
+                ImageActualName = otsu.Split("\r\n")[1];
+                break;
+            case "Sobel":
+                var sobel = pythonService.Sobel(args.Split("\r\n")[0], Value + Image, SobelValue);
+                HistogramAdaptativeSegmentationPath = sobel.Split("\r\n")[0];
+                ImageActualName = sobel.Split("\r\n")[1];
+                break;
+            case "Canny":
+                var canny = pythonService.Canny(args.Split("\r\n")[0], Value + Image, 15, 100, 200);
+                HistogramAdaptativeSegmentationPath = canny.Split("\r\n")[0];
+                ImageActualName = canny.Split("\r\n")[1];
+                break;
+            case "None":
+
+                break;
+        }
+
 
     }
     public void AdaptativeSegmentation()
     {
-        HistogramAdaptativeSegmentationPath = pythonService.AdaptativeSegmentation(ImgChangePath, AdaptativeValue + Image, AdaptativeValue);
+        var args = pythonService.AdaptativeSegmentation(ImgChangePath, ValueSegmentation + Image, ValueSegmentation);
+        HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+        ImageActualName = args.Split("\r\n")[1];
 
     }
     public void Otsu()
     {
-        HistogramOtsuPath = pythonService.Otsu(ImgChangePath, OtsuValue + Image, OtsuValue);
+        DelimitationType = "Otsu";
+        switch (FilterType)
+        {
+            case 1:
+                Mediam();
+                break;
+            case 2:
+                Mediana();
+                break;
+            case 3:
+                Gaussian();
+                break;
+            case 0:
 
-
+                break;
+        }
     }
     public void Sobel()
     {
-        HistogramSobelPath = pythonService.Sobel(ImgChangePath, SobelValue + Image, SobelValue);
+        DelimitationType = "Sobel";
 
+        switch (FilterType)
+        {
+            case 1:
+                Mediam();
+                break;
+            case 2:
+                Mediana();
+                break;
+            case 3:
+                Gaussian();
+                break;
+            case 0:
 
+                break;
+        }
     }
-    public void ManualSegmentation()
+    public void None()
     {
-        HistogramManualSegmentationPath = pythonService.ManualSegmentation(ImgChangePath, ManualValue.ToString() + Threshould1Value.ToString() + Threshould2Value.ToString() + Image, ManualValue, Threshould1Value, Threshould2Value);
+        DelimitationType = "None";
 
+        switch (FilterType)
+        {
+            case 1:
+                Mediam();
+                break;
+            case 2:
+                Mediana();
+                break;
+            case 3:
+                Gaussian();
+                break;
+            case 0:
+
+                break;
+        }
     }
     public void Canny()
     {
-        HistogramCannyPath = pythonService.Canny(ImgChangePath, Image, 15, 100, 200);
+        DelimitationType = "Canny";
 
+        switch (FilterType)
+        {
+            case 1:
+                Mediam();
+                break;
+            case 2:
+                Mediana();
+                break;
+            case 3:
+                Gaussian();
+                break;
+            case 0:
+
+                break;
+        }
     }
+    public void ManualSegmentation()
+    {
+        var args = pythonService.ManualSegmentation(ImgChangePath, ManualValue.ToString() + ValueSegmentation + Threshould2Value.ToString() + Image, ManualValue, ValueSegmentation, Threshould2Value);
+        HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+        ImageActualName = args.Split("\r\n")[1];
+    }
+
 
 
     private async Task LoadFiles(InputFileChangeEventArgs e)
