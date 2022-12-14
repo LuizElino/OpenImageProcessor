@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="nav-item px-1">
-                    <label class="navlabel">Range</label><input class="navrange" type="range" min="1" max="251" value="@Value" @onchange="@(e => RefreshFilterSegmentation(e, ImageActualName))" step="10" />
+                    <label class="navlabel">Range</label><input class="navrange" type="range" min="1" max="251" value="@ValueSegmentation" @onchange="@(e => RefreshFilterSegmentation(e, ImageActualName))" step="10" />
                 </div>
                 <hr>
                 @* Delimitation *@
@@ -546,6 +546,7 @@
     private bool collapseNavMenu = true;
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
     public int FilterType = 0;
+    public int SegmentationType = 0;
 
     //image actual name
     public string ImageActualName = "";
@@ -616,10 +617,21 @@
             if (int.Parse(e.Value.ToString()) > 0)
             {
                 ValueSegmentation = int.Parse(e.Value.ToString());
-                HistogramRefresh(HistogramMediamPath, "Mediam", Value + newName);
+                switch (FilterType)
+                {
+                    case 1:
+                        Mediam();
+                        break;
+                    case 2:
+                        Mediana();
+                        break;
+                    case 3:
+                        Gaussian();
+                        break;
+                    case 0:
 
-                if (AdaptativeClickedState) AdaptativeSegmentation();
-                else if (ManualClickedState) ManualSegmentation();
+                        break;
+                }
             }
         }
 
@@ -726,22 +738,7 @@
 
     }
 
-    public void CannyEdge(string checkValue)
-    {
-        var check = checkValue;
-        string args = "";
-        if (check == "True")
-        {
-            args = pythonService.CannyEdge(ImgChangePath, Image);
-            ObjectNumber = int.Parse(args.Split("\r\n")[1]);
-            ImageActualName = args.Split("\r\n")[0];
-        }
-        else
-        {
-            ImageActualName = OriginalName;
-        }
 
-    }
     public void ToGrayScale()
     {
         var args = pythonService.GetGray(ImgChangePath, Image);
@@ -750,7 +747,7 @@
         ImageActualName = args.Split("\r\n")[1];
         OriginalName = args.Split("\r\n")[1];
     }
-    public string PreviousName = "";
+
     public void Equalize(string checkValue)
     {
         var check = checkValue;
@@ -779,6 +776,37 @@
                 break;
         }
     }
+    public bool HasCount = false;
+    public void CannyEdge(string checkValue)
+    {
+        var check = checkValue;
+        string args = "";
+        if (check == "True")
+        {
+            HasCount = true;
+        }
+        else
+        {
+            ImageActualName = OriginalName;
+            HasCount = false;
+        }
+        switch (FilterType)
+        {
+            case 1:
+                Mediam();
+                break;
+            case 2:
+                Mediana();
+                break;
+            case 3:
+                Gaussian();
+                break;
+            case 0:
+
+                break;
+        }
+
+    }
     public void Histogram(string path, string type)
     {
         pythonService.GenerateHistogram(path, type + "/Histogram/" + Image);
@@ -796,14 +824,30 @@
         AdaptativeClickedState = !AdaptativeClickedState;
         if (AdaptativeClickedState)
         {
+            SegmentationType = 1;
             AdaptativeClicked = "MediamClicked";
             ManualClicked = "";
             ManualClickedState = false;
-            AdaptativeSegmentation();
         }
         else
         {
+            SegmentationType = 0;
             AdaptativeClicked = "";
+        }
+        switch (FilterType)
+        {
+            case 1:
+                Mediam();
+                break;
+            case 2:
+                Mediana();
+                break;
+            case 3:
+                Gaussian();
+                break;
+            case 0:
+
+                break;
         }
     }
 
@@ -811,17 +855,34 @@
     bool ManualClickedState = false;
     public void ManualSegmentationButton()
     {
+        SegmentationType = 2;
         ManualClickedState = !ManualClickedState;
         if (ManualClickedState)
         {
+            SegmentationType = 2;
             ManualClicked = "MediamClicked";
             AdaptativeClicked = "";
             AdaptativeClickedState = false;
-            ManualSegmentation();
         }
         else
         {
+            SegmentationType = 0;
             ManualClicked = "";
+        }
+        switch (FilterType)
+        {
+            case 1:
+                Mediam();
+                break;
+            case 2:
+                Mediana();
+                break;
+            case 3:
+                Gaussian();
+                break;
+            case 0:
+
+                break;
         }
     }
 
@@ -837,12 +898,12 @@
             GaussianClickedState = false;
             MedianaClicked = "";
             MedianaClickedState = false;
-            Mediam();
         }
         else
         {
             MediamClicked = "";
         }
+        Mediam();
     }
 
     string MedianaClicked = "";
@@ -857,12 +918,12 @@
             MediamClicked = "";
             MediamClickedState = false;
             MedianaClicked = "MedianaClicked";
-            Mediana();
         }
         else
         {
             MedianaClicked = "";
         }
+        Mediana();
     }
     string GaussianClicked = "";
     bool GaussianClickedState = false;
@@ -876,124 +937,247 @@
             MediamClicked = "";
             MediamClickedState = false;
             GaussianClicked = "GaussianClicked";
-            Gaussian();
         }
         else
         {
             GaussianClicked = "";
         }
+        Gaussian();
     }
     public void Mediam()
     {
-        FilterType = 1;
-        var args = pythonService.Mediam(ImgChangePath, Value + Image, Value);
-        HistogramMediamPath = args.Split("\r\n")[0];
-        //ImgEqualizedChangePath = args.Split("\r\n")[0];
-        ImageActualName = args.Split("\r\n")[1];
-        if (IsEqualized)
+        string args = "";
+        if(ImgChangePath != "")
         {
-            args = pythonService.Equalize(args.Split("\r\n")[0], ImageActualName);
-            ImageActualName = args.Split("\r\n")[1];
-        }
-        switch (DelimitationType)
-        {
-            case "Otsu":
-                var otsu = pythonService.Otsu(args.Split("\r\n")[0], Value + Image, OtsuValue);
-                HistogramAdaptativeSegmentationPath = otsu.Split("\r\n")[0];
-                ImageActualName = otsu.Split("\r\n")[1];
-                break;
-            case "Sobel":
-                var sobel = pythonService.Sobel(args.Split("\r\n")[0], Value + Image, SobelValue);
-                HistogramAdaptativeSegmentationPath = sobel.Split("\r\n")[0];
-                ImageActualName = sobel.Split("\r\n")[1];
-                break;
-            case "Canny":
-                var canny = pythonService.Canny(args.Split("\r\n")[0], Value + Image, 15, 100, 200);
-                HistogramAdaptativeSegmentationPath = canny.Split("\r\n")[0];
-                ImageActualName = canny.Split("\r\n")[1];
-                break;
-            case "None":
+            if (MediamClickedState)
+            {
+                FilterType = 1;
+                args = pythonService.Mediam(ImgChangePath, Value + Image, Value);
+                HistogramMediamPath = args.Split("\r\n")[0];
+                //ImgEqualizedChangePath = args.Split("\r\n")[0];
+                ImageActualName = args.Split("\r\n")[1];
+            }
+            else
+            {
+                args = ImgChangePath+"\r\n";
+            }
+            if (IsEqualized)
+            {
+                args = pythonService.Equalize(args.Split("\r\n")[0], ImageActualName);
+                ImageActualName = args.Split("\r\n")[1];
+            }
+            if (SegmentationType == 2)
+            {
+                args = pythonService.ManualSegmentation(args.Split("\r\n")[0], ManualValue.ToString() + ValueSegmentation + Threshould2Value.ToString() + ImageActualName, ManualValue, ValueSegmentation, Threshould2Value);
+                HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+                ImageActualName = args.Split("\r\n")[1];
+            }
+            else if (SegmentationType == 1)
+            {
+                args = pythonService.AdaptativeSegmentation(args.Split("\r\n")[0], ValueSegmentation + ImageActualName, ValueSegmentation);
+                HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+                ImageActualName = args.Split("\r\n")[1];
+            }
 
-                break;
-        }
+            switch (DelimitationType)
+            {
+                case "Otsu":
+                    args = pythonService.Otsu(args.Split("\r\n")[0], Value + ImageActualName, OtsuValue);
+                    HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+                    ImageActualName = args.Split("\r\n")[1];
+                    break;
+                case "Sobel":
+                    args = pythonService.Sobel(args.Split("\r\n")[0], Value + ImageActualName, SobelValue);
+                    HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+                    ImageActualName = args.Split("\r\n")[1];
+                    break;
+                case "Canny":
+                    args = pythonService.Canny(args.Split("\r\n")[0], Value + ImageActualName, 15, 100, 200);
+                    HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+                    ImageActualName = args.Split("\r\n")[1];
+                    break;
+                case "None":
 
+                    break;
+            }
+            if (HasCount)
+            {
+                args = pythonService.CannyEdge(args.Split("\r\n")[0], ImageActualName);
+                ObjectNumber = int.Parse(args.Split("\r\n")[1]);
+                ImageActualName = args.Split("\r\n")[0];
+            }
+        }
     }
     public void Mediana()
     {
-        FilterType = 2;
-        var args = pythonService.Mediana(ImgChangePath, Value + Image, Value);
-        HistogramMediamPath = args.Split("\r\n")[0];
-        //ImgEqualizedChangePath = args.Split("\r\n")[0];
-        ImageActualName = args.Split("\r\n")[1];
-        if (IsEqualized)
+        string args = "";
+        if (ImgChangePath != "")
         {
-            args = pythonService.Equalize(args.Split("\r\n")[0], ImageActualName);
-            ImageActualName = args.Split("\r\n")[1];
-        }
-        switch (DelimitationType)
-        {
-            case "Otsu":
-                var otsu = pythonService.Otsu(args.Split("\r\n")[0], Value + Image, OtsuValue);
-                HistogramAdaptativeSegmentationPath = otsu.Split("\r\n")[0];
-                ImageActualName = otsu.Split("\r\n")[1];
-                break;
-            case "Sobel":
-                var sobel = pythonService.Sobel(args.Split("\r\n")[0], Value + Image, SobelValue);
-                HistogramAdaptativeSegmentationPath = sobel.Split("\r\n")[0];
-                ImageActualName = sobel.Split("\r\n")[1];
-                break;
-            case "Canny":
-                var canny = pythonService.Canny(args.Split("\r\n")[0], Value + Image, 15, 100, 200);
-                HistogramAdaptativeSegmentationPath = canny.Split("\r\n")[0];
-                ImageActualName = canny.Split("\r\n")[1];
-                break;
-            case "None":
+            if (MedianaClickedState)
+            {
+                FilterType = 2;
+                args = pythonService.Mediana(ImgChangePath, Value + Image, Value);
+                HistogramMediamPath = args.Split("\r\n")[0];
+                //ImgEqualizedChangePath = args.Split("\r\n")[0];
+                ImageActualName = args.Split("\r\n")[1];
+            }
+            else
+            {
+                args = ImgChangePath+"\r\n";
+                ImageActualName = OriginalName;
+            }
+            if (IsEqualized)
+            {
+                args = pythonService.Equalize(args.Split("\r\n")[0], ImageActualName);
+                ImageActualName = args.Split("\r\n")[1];
+            }
+            if (SegmentationType == 2)
+            {
+                args = pythonService.ManualSegmentation(args.Split("\r\n")[0], ManualValue.ToString() + ValueSegmentation + Threshould2Value.ToString() + ImageActualName, ManualValue, ValueSegmentation, Threshould2Value);
+                HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+                ImageActualName = args.Split("\r\n")[1];
+            }
+            else if (SegmentationType == 1)
+            {
+                args = pythonService.AdaptativeSegmentation(args.Split("\r\n")[0], ValueSegmentation + ImageActualName, ValueSegmentation);
+                HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+                ImageActualName = args.Split("\r\n")[1];
+            }
 
-                break;
+            switch (DelimitationType)
+            {
+                case "Otsu":
+                    args = pythonService.Otsu(args.Split("\r\n")[0], Value + ImageActualName, OtsuValue);
+                    HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+                    ImageActualName = args.Split("\r\n")[1];
+                    break;
+                case "Sobel":
+                    args = pythonService.Sobel(args.Split("\r\n")[0], Value + ImageActualName, SobelValue);
+                    HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+                    ImageActualName = args.Split("\r\n")[1];
+                    break;
+                case "Canny":
+                    args = pythonService.Canny(args.Split("\r\n")[0], Value + ImageActualName, 15, 100, 200);
+                    HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+                    ImageActualName = args.Split("\r\n")[1];
+                    break;
+                case "None":
+
+                    break;
+            }
+            if (HasCount)
+            {
+                args = pythonService.CannyEdge(args.Split("\r\n")[0], ImageActualName);
+                ObjectNumber = int.Parse(args.Split("\r\n")[1]);
+                ImageActualName = args.Split("\r\n")[0];
+            }
         }
 
     }
     public void Gaussian()
     {
-        FilterType = 3;
-        var args = pythonService.Gaussian(ImgChangePath, Value + Image, Value);
-        HistogramMediamPath = args.Split("\r\n")[0];
-        //ImgEqualizedChangePath = args.Split("\r\n")[0];
-        ImageActualName = args.Split("\r\n")[1];
-        if (IsEqualized)
+        string args = "";
+        if (ImgChangePath != "")
         {
-            args = pythonService.Equalize(args.Split("\r\n")[0], ImageActualName);
-            ImageActualName = args.Split("\r\n")[1];
+            if (GaussianClickedState)
+            {
+                FilterType = 3;
+                args = pythonService.Gaussian(ImgChangePath, Value + Image, Value);
+                HistogramMediamPath = args.Split("\r\n")[0];
+                //ImgEqualizedChangePath = args.Split("\r\n")[0];
+                ImageActualName = args.Split("\r\n")[1];
+            }
+              else
+            {
+                args = ImgChangePath+"\r\n";
+            }
+            if (IsEqualized)
+            {
+                args = pythonService.Equalize(args.Split("\r\n")[0], ImageActualName);
+                ImageActualName = args.Split("\r\n")[1];
+            }
+            if (SegmentationType == 2)
+            {
+                args = pythonService.ManualSegmentation(args.Split("\r\n")[0], ManualValue.ToString() + ValueSegmentation + Threshould2Value.ToString() + ImageActualName, ManualValue, ValueSegmentation, Threshould2Value);
+                HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+                ImageActualName = args.Split("\r\n")[1];
+            }
+            else if (SegmentationType == 1)
+            {
+                args = pythonService.AdaptativeSegmentation(args.Split("\r\n")[0], ValueSegmentation + ImageActualName, ValueSegmentation);
+                HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+                ImageActualName = args.Split("\r\n")[1];
+            }
+
+            switch (DelimitationType)
+            {
+                case "Otsu":
+                    args = pythonService.Otsu(args.Split("\r\n")[0], Value + ImageActualName, OtsuValue);
+                    HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+                    ImageActualName = args.Split("\r\n")[1];
+                    break;
+                case "Sobel":
+                    args = pythonService.Sobel(args.Split("\r\n")[0], Value + ImageActualName, SobelValue);
+                    HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+                    ImageActualName = args.Split("\r\n")[1];
+                    break;
+                case "Canny":
+                    args = pythonService.Canny(args.Split("\r\n")[0], Value + ImageActualName, 15, 100, 200);
+                    HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
+                    ImageActualName = args.Split("\r\n")[1];
+                    break;
+                case "None":
+
+                    break;
+            }
+            if (HasCount)
+            {
+                args = pythonService.CannyEdge(args.Split("\r\n")[0], ImageActualName);
+                ObjectNumber = int.Parse(args.Split("\r\n")[1]);
+                ImageActualName = args.Split("\r\n")[0];
+            }
+
         }
-        switch (DelimitationType)
+    }
+    public void AdaptativeSegmentation()
+    {
+
+        switch (FilterType)
         {
-            case "Otsu":
-                var otsu = pythonService.Otsu(args.Split("\r\n")[0], Value + Image, OtsuValue);
-                HistogramAdaptativeSegmentationPath = otsu.Split("\r\n")[0];
-                ImageActualName = otsu.Split("\r\n")[1];
+            case 1:
+                Mediam();
                 break;
-            case "Sobel":
-                var sobel = pythonService.Sobel(args.Split("\r\n")[0], Value + Image, SobelValue);
-                HistogramAdaptativeSegmentationPath = sobel.Split("\r\n")[0];
-                ImageActualName = sobel.Split("\r\n")[1];
+            case 2:
+                Mediana();
                 break;
-            case "Canny":
-                var canny = pythonService.Canny(args.Split("\r\n")[0], Value + Image, 15, 100, 200);
-                HistogramAdaptativeSegmentationPath = canny.Split("\r\n")[0];
-                ImageActualName = canny.Split("\r\n")[1];
+            case 3:
+                Gaussian();
                 break;
-            case "None":
+            case 0:
 
                 break;
         }
 
 
     }
-    public void AdaptativeSegmentation()
+    public void ManualSegmentation()
     {
-        var args = pythonService.AdaptativeSegmentation(ImgChangePath, ValueSegmentation + Image, ValueSegmentation);
-        HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
-        ImageActualName = args.Split("\r\n")[1];
+        SegmentationType = 2;
+        switch (FilterType)
+        {
+            case 1:
+                Mediam();
+                break;
+            case 2:
+                Mediana();
+                break;
+            case 3:
+                Gaussian();
+                break;
+            case 0:
+
+                break;
+        }
 
     }
     public void Otsu()
@@ -1075,12 +1259,7 @@
                 break;
         }
     }
-    public void ManualSegmentation()
-    {
-        var args = pythonService.ManualSegmentation(ImgChangePath, ManualValue.ToString() + ValueSegmentation + Threshould2Value.ToString() + Image, ManualValue, ValueSegmentation, Threshould2Value);
-        HistogramAdaptativeSegmentationPath = args.Split("\r\n")[0];
-        ImageActualName = args.Split("\r\n")[1];
-    }
+
 
 
 
@@ -1116,7 +1295,7 @@
         var args = pythonService.Equalize(ImgChangePath, ImageActualName);
         //HistogramEqualizedPath =  args.Split("\r\n")[0];
         ImgEqualizedChangePath = args.Split("\r\n")[0];
-        //ImageActualName =  args.Split("\r\n")[1];
+
         isLoading = false;
     }
 }
